@@ -7,6 +7,8 @@ var io = require('socket.io')(http);
 //TODO: Use cases diagram
 //TODO: Integrate with the logon web services
 //TODO: Do it using TDD
+//TODO: Do a research about socket.io alternatives
+//TODO: Think in a better name for 'UserList'
 
 app.use(express.static('public/html'));
 app.use('/css', express.static('public/css'));

@@ -3,6 +3,7 @@
 <head>
     <title>Simple Node.js + WebSockets chat</title>
     <link rel="stylesheet" href="/css/index.css"/>
+    <link rel="stylesheet" href="/css/animate.css"/>
 </head>
 <body>
 <ul id="messages"></ul>
@@ -18,7 +19,7 @@
     var socket = io();
     $('form').submit(function(){
         socket.emit('chat-message', $('#m').val());
-        $('#messages').append($('<li>').text($('#m').val()));
+        $('#messages').append($('<li>').append($('<span class="animated fadeIn">').text($('#m').val())));
         $('#m').val('');
         return false;
     });
