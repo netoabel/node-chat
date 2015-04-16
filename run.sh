@@ -1,1 +1,2 @@
-docker run --rm -it -v $(pwd)/src/:/home/node-chat netoabel/node-chat /bin/bash
+#!/usr/bin/env bash
+docker run --rm -it -p 3000:3000 -v $(pwd)/src/:/home/node-chat netoabel/node-chat /bin/bash
