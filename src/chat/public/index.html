@@ -13,10 +13,10 @@
     <button>Send</button>
 </form>
 
-<script src="/socket.io/socket.io.js"></script>
+<script src="/js/socket.io.js"></script>
 <script src="/js/jquery-2.1.3.min.js"></script>
 <script>
-    var socket = io();
+    var socket = io.connect('http://localhost:3000');
     $('form').submit(function(){
         socket.emit('chat-message', $('#m').val());
         $('#messages').append($('<li>').append($('<span class="animated fadeIn">').text($('#m').val())));

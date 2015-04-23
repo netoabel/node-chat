@@ -1,0 +1,18 @@
+{
+  "apps": [{
+    "name": "chat",
+    "script": "./chat/index.js",
+    "ignoreWatch": ["node_modules", "logs"],
+    "watch": ["chat"],
+    "cwd": ".",
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "exec_mode": "fork_mode",
+    "log_date_format": "YYYY-MM-DD HH:mm",
+    "log_file": "./logs/log-chat.log",
+    "error_file": "./logs/err-chat.log",
+    "out_file": "./logs/out-chat.log",
+    "pid_file": "./logs/pid-chat.pid"
+  }]
+}

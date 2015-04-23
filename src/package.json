@@ -24,6 +24,8 @@
   "homepage": "https://github.com/netoabel/node-chat",
   "dependencies": {
     "express": "4.12.3",
-    "socket.io": "1.3.5"
+    "socket.io": "1.3.5",
+    "gulp": "3.8.11",
+    "gulp-shell": "^0.2.11"
   }
 }

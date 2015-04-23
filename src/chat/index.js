@@ -1,22 +1,12 @@
-var express = require('express');
-var app = express();
-var http = require('http').Server(app);
+'use strict';
+
+var http = require('http').Server();
 var io = require('socket.io')(http);
 
-//TODO: Do a research about existing solutions
-//TODO: Use cases diagram
 //TODO: Integrate with the logon web services
 //TODO: Do it using TDD
 //TODO: Do a research about socket.io alternatives
-//TODO: Think in a better name for 'UserList'
-
-app.use(express.static('public/html'));
-app.use('/css', express.static('public/css'));
-app.use('/js', express.static('public/js'));
-
-app.get('/', function(req, res){
-  res.sendFile('/index.html');
-});
+//TODO: Think in a better name for 'UserManager'
 
 io.on('connection', function(socket){
   socket.broadcast.emit('chat-message', 'New user connected');
@@ -34,5 +24,5 @@ io.on('connection', function(socket){
 });
 
 http.listen(3000, function () {
-  console.log('Server is listening on port 3000');
+  console.log('WebSocket server listening for connections on port 3000');
 });
