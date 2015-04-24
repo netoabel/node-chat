@@ -12,3 +12,10 @@ gulp.task('up', function() {
       'pm2 logs'
     ]));
 });
+
+gulp.task('test', function() {
+  return gulp.src('')
+    .pipe(shell([
+      'npm test'
+    ]));
+});

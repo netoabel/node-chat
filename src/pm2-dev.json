@@ -1,7 +1,7 @@
 {
   "apps": [{
     "name": "chat",
-    "script": "./chat/index.js",
+    "script": "./chat/lib/index.js",
     "ignoreWatch": ["node_modules", "logs"],
     "watch": ["chat"],
     "cwd": ".",

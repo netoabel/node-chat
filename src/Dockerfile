@@ -7,7 +7,7 @@ RUN npm install -g gulp@v3.8.11 \
 && npm install -g mocha
 
 ENV HOME /home/node-chat/
- 
+
 ADD . $HOME
 
 WORKDIR $HOME
