@@ -37,7 +37,7 @@ describe("Connection  Controller",function(){
         });
 
         it("should set the socket",function(){
-            var fakeSocket = {test:"uriadksahdlsaldhsla"};
+            var fakeSocket = {};
             var stubIo = {
                 connect: function(uri){
                     return fakeSocket
@@ -50,14 +50,48 @@ describe("Connection  Controller",function(){
         });
     });
 
+    describe("#isConnected",function(){
 
+        it("should return false if socket is null",function(){
+            var connectionController =  new ConnectionController();
+            expect(connectionController.isConnected()).to.be.false;
+        });
+
+        it("should return false if socket isn't connected",function(){
+            var fakeSocket = {connected: false};
+            var stubIo = {
+                connect: function(uri){
+                    return fakeSocket
+                }
+            };
+            var connectionController = new ConnectionController(stubIo);
+            connectionController.startConnection("localhost");
+
+            expect(connectionController.isConnected()).to.be.false;
+
+        });
+
+        it("should return true if socket is connected", function () {
+            var fakeSocket = {connected: true};
+            var stubIo = {
+                connect: function(uri){
+                    return fakeSocket
+                }
+            };
+            var connectionController = new ConnectionController(stubIo);
+            connectionController.startConnection("localhost");
+
+            expect(connectionController.isConnected()).to.be.ok;
+        })
+    });
 
     describe("#setMessageReceivedEvent",function(){
         var connectionController;
 
         beforeEach(function () {
             var stubSocket = {
-                on: function(params){}
+                on: function(params){},
+                connected:true
             };
             var stubIo = {
                 connect: function (uri) {
@@ -103,7 +137,8 @@ describe("Connection  Controller",function(){
 
         beforeEach(function () {
             var stubSocket = {
-                emit: function(params){}
+                emit: function(params){},
+                connected:true
             };
             var stubIo = {
                 connect: function (uri) {

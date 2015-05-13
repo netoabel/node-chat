@@ -14,7 +14,7 @@ ConnectionController.prototype = {
     },
 
     setMessageReceivedEvent: function(event){
-        if(this.socket && typeof(event) === "function") {
+        if(this.isConnected() && typeof(event) === "function") {
             this.socket.on('chat-message', event)
         } else {
             throw Error("fail in creating the event");
@@ -22,16 +22,19 @@ ConnectionController.prototype = {
     },
 
     sendMessageEvent: function(message){
-        if(this.socket && message){
+        if(this.isConnected() && message){
             this.socket.emit('chat-message',message);
         } else {
             throw  Error("fail in send event")
         }
-
     },
 
     isConnected: function(){
-
+        var connected = false;
+        if(this.socket && this.socket.connected){
+            connected = true;
+        }
+        return connected;
     }
 };
 
