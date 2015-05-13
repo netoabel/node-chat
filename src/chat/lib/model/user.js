@@ -1,18 +1,27 @@
 'use strict';
 
+var connectionId,
+    name,
+    userId;
+
 function User(data){
   if(data) {
-    this.name = data.name;
-    this.userId = data.userId;
+    connectionId = data.connectionId;
+    userId = data.userId;
+    name = data.name;
   }
 }
 
 User.prototype = {
   constructor: User,
 
+  getUserId: function () {
+    return userId;
+  },
+
   isValid: function () {
     var result = true;
-    if(!this.name || !this.userId) {
+    if(!name || !userId) {
       result = false;
     }
     return result;

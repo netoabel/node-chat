@@ -1,9 +1,11 @@
 'use strict';
-//TODO: Is it ok if UserList knows User?
-var User = require('./user');
+var User = require('./user'),
+    list = [];
+
+//TODO:     Find another way to declare private variables. This doesn't work. By doing it this way, we are declaring
+//TODO      private variables that are shared to all instances of this class
 
 function UserList(){
-  this.users = [];
 }
 
 UserList.prototype = {
@@ -11,28 +13,28 @@ UserList.prototype = {
 
   add: function (user) {
     if(user && user instanceof User && user.isValid()) {
-      this.users.push(user);
+      list.push(user);
     }
   },
 
   remove: function (userId) {
-    this.users = this.users.filter(function (user) {
-      return user.userId !== userId;
+    list = list.filter(function (user) {
+      return user.getUserId() !== userId;
     });
   },
 
-  getUserById: function (userId) {
-    var result;
-    result = this.users.filter(function (user) {
-      return user.userId === userId;
-    })[0];
+  get: function (userId) {
+    var result = list.filter(function (user) {
+      return user.getUserId() === userId;
+    });
 
     if(result) {
-      return new User({
-        userId: result.userId,
-        name: result.name
-      });
+      return result[0];
     }
+  },
+
+  getList: function () {
+    return list;
   }
 };
 

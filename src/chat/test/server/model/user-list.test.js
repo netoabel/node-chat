@@ -1,8 +1,8 @@
 'use strict';
 
 var expect = require('chai').expect,
-    UserList = require('../../lib/model/user-list.js'),
-    User = require('../../lib/model/user.js');
+    UserList = require('../../../lib/model/user-list.js'),
+    User = require('../../../lib/model/user.js');
 
 describe('Given UserList', function () {
   describe('#add()', function () {
@@ -16,7 +16,7 @@ describe('Given UserList', function () {
       it('should add it to the users list', function () {
         var user = new User({name: 'username', userId:'1'});
         userList.add(user);
-        expect(userList.users).to.contain(user);
+        expect(userList.getList()).to.contain(user);
       });
     });
 
@@ -24,7 +24,7 @@ describe('Given UserList', function () {
       it('should not add it to the users list', function () {
         var user = new User({name: 'User'});
         userList.add(user);
-        expect(userList.users).to.not.contain(user);
+        expect(userList.getList()).to.not.contain(user);
       });
     });
 
@@ -57,7 +57,7 @@ describe('Given UserList', function () {
         userList.add(user);
         userList.remove(existingUserId);
 
-        expect(userList.users).to.be.empty;
+        expect(userList.getList()).to.be.empty;
       });
     });
 
@@ -66,7 +66,7 @@ describe('Given UserList', function () {
         userList.add(user);
         userList.remove('non existent id');
 
-        expect(userList.users).to.not.be.empty;
+        expect(userList.getList()).to.not.be.empty;
       });
     });
 
@@ -74,12 +74,12 @@ describe('Given UserList', function () {
       it('should keep it empty', function () {
         userList.remove(existingUserId);
 
-        expect(userList.users).to.be.empty;
+        expect(userList.getList()).to.be.empty;
       });
     });
   });
 
-  describe('#getUserById()', function () {
+  describe('#get()', function () {
     var userList, existingUserId, user;
 
     beforeEach(function () {
@@ -91,27 +91,27 @@ describe('Given UserList', function () {
 
     describe('With an existing userId', function () {
       it('should return a user', function () {
-        expect(userList.getUserById(existingUserId)).to.be.instanceOf(User);
+        expect(userList.get(existingUserId)).to.be.instanceOf(User);
       });
 
       it('should return a new user', function () {
-        expect(userList.getUserById(existingUserId)).to.not.be.equal(user);
+        expect(userList.get(existingUserId)).to.not.be.equal(user);
       });
 
       it('should return a user with the given userId', function () {
-        expect(userList.getUserById(existingUserId).userId).to.be.equal(existingUserId);
+        expect(userList.get(existingUserId).getUserId()).to.be.equal(existingUserId);
       });
     });
 
     describe('With an non existent userId', function () {
       it('should return undefined', function () {
-        expect(userList.getUserById('123')).to.be.undefined;
+        expect(userList.get('123')).to.be.undefined;
       });
     });
 
     describe('With no userId', function () {
       it('should return undefined', function () {
-        expect(userList.getUserById()).to.be.undefined;
+        expect(userList.get()).to.be.undefined;
       });
     });
   });

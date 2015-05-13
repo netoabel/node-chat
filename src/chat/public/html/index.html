@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <title>Simple Node.js + WebSockets chat</title>
+    <link rel="stylesheet" href="/css/index.css"/>
+    <link rel="stylesheet" href="/css/animate.css"/>
+</head>
+<body>
+<ul id="messages"></ul>
+
+<form action="">
+    <input id="m" autocomplete="off"/>
+    <button>Send</button>
+</form>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/jquery-2.1.3.min.js"></script>
+<script>
+    var socket = io();
+    $('form').submit(function(){
+        socket.emit('chat-message', $('#m').val());
+        $('#messages').append($('<li>').append($('<span class="animated fadeIn">').text($('#m').val())));
+        $('#m').val('');
+        return false;
+    });
+    socket.on('chat-message', function(msg){
+        $('#messages').append($('<li>').text(msg));
+    });
+</script>
+</body>
+</html>

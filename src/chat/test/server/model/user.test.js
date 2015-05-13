@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect,
-    User = require('../../lib/model/user.js');
+    User = require('../../../lib/model/user.js');
 
 describe('Given User', function () {
   describe('#isValid()', function () {
