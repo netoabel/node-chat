@@ -94,10 +94,6 @@ describe('Given UserList', function () {
         expect(userList.get(existingUserId)).to.be.instanceOf(User);
       });
 
-      it('should return a new user', function () {
-        expect(userList.get(existingUserId)).to.not.be.equal(user);
-      });
-
       it('should return a user with the given userId', function () {
         expect(userList.get(existingUserId).getUserId()).to.be.equal(existingUserId);
       });

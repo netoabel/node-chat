@@ -1,31 +1,35 @@
 'use strict';
 
-var connectionId,
-    name,
-    userId;
+var User = (function () {
 
-function User(data){
-  if(data) {
-    connectionId = data.connectionId;
-    userId = data.userId;
-    name = data.name;
-  }
-}
+  var _ = new WeakMap();
 
-User.prototype = {
-  constructor: User,
-
-  getUserId: function () {
-    return userId;
-  },
-
-  isValid: function () {
-    var result = true;
-    if(!name || !userId) {
-      result = false;
+  function User(data){
+    if(data) {
+      _[this] = {
+        connectionId: data.connectionId,
+        userId: data.userId,
+        name: data.name
+      };
     }
-    return result;
   }
-};
 
-module.exports = User;
+  User.prototype = {
+    constructor: User,
+
+    getUserId: function () {
+      return _[this].userId;
+    },
+
+    isValid: function () {
+      var result = true;
+      if(!_[this].name || !_[this].userId) {
+        result = false;
+      }
+      return result;
+    }
+  };
+
+  module.exports = User;
+
+}());
