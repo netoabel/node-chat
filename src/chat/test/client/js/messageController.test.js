@@ -12,27 +12,75 @@ describe("Message Controller",function(){
             expect(messageController.listener).to.equal(listener);
         });
 
-        it("should throw a error if listener isn't provided", function () {
-            expect(function(){
-                new MessageController();
-            }).to.throw(Error);
-        });
-
-        it("should have a null connectionController",function(){
+        it("should set a connectionController if provided",function(){
             var listener = {};
-            var messageController = new MessageController(listener);
-            expect(messageController.connectionController).to.be.null;
+            var connectionController = new  ConnectionController();
+            var messageController = new MessageController(listener,connectionController);
+            expect(messageController.connectionController).to.equal(connectionController);
         });
     });
 
-    describe("#setConnectionController",function(){
+    describe("#onMessageReceived", function () {
+        var stubConnectionController;
+        var stubListener;
         var messageController;
+
         beforeEach(function () {
-           var listerner = {
-               update: function(msg){}
-           };
-           messageController
+            stubConnectionController = new ConnectionController();
+            stubListener = {update:function(){}};
+            messageController = new MessageController(stubListener,stubConnectionController);
+        });
+
+        it("#should send the message to the listener update method",function(){
+            var _message = "test";
+            stubListener.update = function(message){
+                expect(message).to.equal(_message);
+            };
+            messageController.onMessageReceived(_message);
+        });
+
+    });
+
+    describe("#setOnMessageReceivedEvent",function(){
+        var stubConnectionController;
+        var stubListener;
+        var messageController;
+
+        beforeEach(function () {
+            stubConnectionController = new ConnectionController();
+            stubListener = {update:function(){}};
+            messageController = new MessageController(stubListener,stubConnectionController);
+        });
+
+        it("should set using it functions called onMessageReceived", function (){
+            messageController.onMessageReceived = function(){};
+            stubConnectionController.setMessageReceivedEvent = function (event) {
+                expect(event).to.equal(messageController.onMessageReceived);
+            };
+            messageController.setOnMessageReceivedEvent();
         });
     });
+
+    describe("#sendMessage", function () {
+        var stubConnectionController;
+        var stubListener;
+        var messageController;
+
+        beforeEach(function () {
+            stubConnectionController = new ConnectionController();
+            stubListener = {update:function(){}};
+            messageController = new MessageController(stubListener,stubConnectionController);
+        });
+
+        it("should send the message to messageController",function(){
+            var _message = "test";
+            stubConnectionController.sendMessageEvent = function (message) {
+                expect(message).to.equal(_message);
+            };
+            messageController.sendMessageEvent(_message);
+        });
+    });
+
+
 });
 
