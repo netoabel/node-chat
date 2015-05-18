@@ -7,27 +7,17 @@
 <body>
 <div id="mocha"></div>
 
-<!-- tests setup -->
-<script src="js/library/jquery-2.1.3.min.js"></script>
-<script src="js/library/chai.js"></script>
-<script src="js/library/expect.js"></script>
-<script src="js/library/mocha.js"></script>
-<script src="../../public/js/library/socket.io.js"></script>
-<script>mocha.setup('bdd')</script>
-
-<!-- src files -->
-<script src="../../public/js/connectionController.js"></script>
-<script src="../../public/js/messageController.js"></script>
-
-<!-- test files-->
-<script src="js/connectionController.test.js"></script>
-<script src="js/messageController.test.js"></script>
-
-<!-- run tests-->
-<script>
-    mocha.checkLeaks();
-    mocha.globals(['jQuery']);
-    mocha.run();
+<script src="js/library/require.js" type="text/javascript"></script>
+<script src="js/library/mocha.js" type="text/javascript"></script>
+<script src="js/config.js" type="text/javascript"></script>
+<script type="text/javascript">
+    require(['connectionControllerTest','messageControllerTest'],function(connectionControllerTest){
+        connectionControllerTest();
+    });
+    require(['messageControllerTest'],function(messageController){
+        messageController();
+        mocha.run();
+    });
 </script>
 </body>
 </html>
