@@ -16,13 +16,13 @@ require.config({
 
         //tests
         socketIoControllerTests: 'app/socketIoController.test',
-        messageControllerTest: 'app/messageController.test',
+        socketMessengerTests: 'app/socketMessenger.test',
 
         //app
-
-        connectionController:'../../../public/js/app/socketIoController',
-        messageController:'../../../public/js/app/messageController',
-        connectionController:'../../../public/js/app/connectionController'
+        socketIoController:'../../../public/js/app/socketIoController',
+        socketMessenger:'../../../public/js/app/socketMessenger',
+        connectionController:'../../../public/js/app/connectionController',
+        messengerController:'../../../public/js/app/messageController'
     },
 
     priority:[

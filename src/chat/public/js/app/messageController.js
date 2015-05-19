@@ -1,26 +1,9 @@
 'use strict';
-define(function(require) {
 
-    function MessageController(listener, connectionController) {
-        this.listener = listener;
-        this.connectionController = connectionController;
-    }
-
-    MessageController.prototype = {
-        constructor: MessageController,
-
-        setOnMessageReceivedEvent: function () {
-            this.connectionController.setMessageReceivedEvent(this.onMessageReceived);
-        },
-
-        onMessageReceived: function (message) {
-            this.listener.update(message);
-        },
-
-        sendMessageEvent: function (message) {
-            this.connectionController.sendMessageEvent(message);
-        }
-
+define(function(){
+    var MessangeController = {
+        sendMessager:function(){},
+        setOnMessageReceivedEvent: function(message){}
     };
-    return MessageController;
+    return MessangeController;
 });

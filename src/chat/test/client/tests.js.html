@@ -12,9 +12,9 @@
 <script src="js/config.js" type="text/javascript"></script>
 <script type="text/javascript">
     require(['socketIoControllerTests',
-                'messageControllerTest'],function(connectionControllerTest,messageController){
+                'socketMessengerTests'],function(connectionControllerTest,socketMessengerTest){
         connectionControllerTest();
-        messageController();
+        socketMessengerTest();
         mocha.run();
     });
 </script>
