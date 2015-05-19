@@ -15,12 +15,14 @@ require.config({
         chai:'library/chai',
 
         //tests
-        connectionControllerTest: 'app/connectionController.test',
+        socketIoControllerTests: 'app/socketIoController.test',
         messageControllerTest: 'app/messageController.test',
 
         //app
-        connectionController:'../../../public/js/app/connectionController',
-        messageController:'../../../public/js/app/messageController'
+
+        connectionController:'../../../public/js/app/socketIoController',
+        messageController:'../../../public/js/app/messageController',
+        connectionController:'../../../public/js/app/connectionController'
     },
 
     priority:[

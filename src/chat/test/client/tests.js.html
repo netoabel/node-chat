@@ -11,10 +11,9 @@
 <script src="js/library/mocha.js" type="text/javascript"></script>
 <script src="js/config.js" type="text/javascript"></script>
 <script type="text/javascript">
-    require(['connectionControllerTest','messageControllerTest'],function(connectionControllerTest){
+    require(['socketIoControllerTests',
+                'messageControllerTest'],function(connectionControllerTest,messageController){
         connectionControllerTest();
-    });
-    require(['messageControllerTest'],function(messageController){
         messageController();
         mocha.run();
     });

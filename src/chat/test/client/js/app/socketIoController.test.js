@@ -1,7 +1,7 @@
 "use strict";
 
 
-define(['chai','connectionController'],function(chai,ConnectionController) {
+define(['chai','socketIoController'],function(chai,ScocketIoController) {
     return  function() {
         var expect = chai.expect;
         describe("Connection  Controller", function () {
@@ -10,13 +10,13 @@ define(['chai','connectionController'],function(chai,ConnectionController) {
 
                 it("should set a Io class if provided", function () {
                     var io = {connect: "fake"};
-                    var connectionController = new ConnectionController(io);
-                    expect(connectionController.io).to.deep.equal(io)
+                    var socketIoController = new ScocketIoController(io);
+                    expect(socketIoController.io).to.deep.equal(io)
                 });
 
                 it("should have a null socket", function () {
-                    var connectionController = new ConnectionController();
-                    expect(connectionController.socket).to.be.null;
+                    var socketIoController = new ScocketIoController();
+                    expect(socketIoController.socket).to.be.null;
                 });
             });
 
@@ -29,8 +29,8 @@ define(['chai','connectionController'],function(chai,ConnectionController) {
                             expect(uri).to.equal(fakeUri);
                         }
                     };
-                    var connectionController = new ConnectionController(stubIo);
-                    connectionController.startConnection(fakeUri);
+                    var socketIoController = new ScocketIoController(stubIo);
+                    socketIoController.startConnection(fakeUri);
                 });
 
                 it("should set the socket", function () {
@@ -40,9 +40,9 @@ define(['chai','connectionController'],function(chai,ConnectionController) {
                             return fakeSocket
                         }
                     };
-                    var connectionController = new ConnectionController(stubIo);
-                    connectionController.startConnection("localhost");
-                    expect(connectionController.socket).to.deep.equal(fakeSocket)
+                    var socketIoController = new ScocketIoController(stubIo);
+                    socketIoController.startConnection("localhost");
+                    expect(socketIoController.socket).to.deep.equal(fakeSocket)
 
                 });
             });
@@ -50,8 +50,8 @@ define(['chai','connectionController'],function(chai,ConnectionController) {
             describe("#isConnected", function () {
 
                 it("should return false if socket is null", function () {
-                    var connectionController = new ConnectionController();
-                    expect(connectionController.isConnected()).to.be.false;
+                    var socketIoController = new ScocketIoController();
+                    expect(socketIoController.isConnected()).to.be.false;
                 });
 
                 it("should return false if socket isn't connected", function () {
@@ -61,10 +61,10 @@ define(['chai','connectionController'],function(chai,ConnectionController) {
                             return fakeSocket
                         }
                     };
-                    var connectionController = new ConnectionController(stubIo);
-                    connectionController.startConnection("localhost");
+                    var socketIoController = new ScocketIoController(stubIo);
+                    socketIoController.startConnection("localhost");
 
-                    expect(connectionController.isConnected()).to.be.false;
+                    expect(socketIoController.isConnected()).to.be.false;
 
                 });
 
@@ -75,15 +75,15 @@ define(['chai','connectionController'],function(chai,ConnectionController) {
                             return fakeSocket
                         }
                     };
-                    var connectionController = new ConnectionController(stubIo);
-                    connectionController.startConnection("localhost");
+                    var socketIoController = new ScocketIoController(stubIo);
+                    socketIoController.startConnection("localhost");
 
-                    expect(connectionController.isConnected()).to.be.ok;
+                    expect(socketIoController.isConnected()).to.be.ok;
                 })
             });
 
             describe("#setMessageReceivedEvent", function () {
-                var connectionController;
+                var socketIoController;
 
                 beforeEach(function () {
                     var stubSocket = {
@@ -96,45 +96,45 @@ define(['chai','connectionController'],function(chai,ConnectionController) {
                             return stubSocket
                         }
                     };
-                    connectionController = new ConnectionController(stubIo);
+                    socketIoController = new ScocketIoController(stubIo);
                 });
 
                 it("should thrown error if isn't connected", function () {
                     expect(function () {
-                        connectionController.setMessageReceivedEvent(function () {
+                        socketIoController.setMessageReceivedEvent(function () {
                         })
                     }).to.throw(Error);
                 });
 
                 it("should thrown error if the event isn't a function", function () {
-                    connectionController.startConnection("localhost");
+                    socketIoController.startConnection("localhost");
                     expect(function () {
-                        connectionController.setMessageReceivedEvent();
+                        socketIoController.setMessageReceivedEvent();
                     }).to.throw(Error);
                 });
 
                 it("should set 'chat-message' event", function () {
-                    connectionController.startConnection("localhost");
-                    connectionController.socket.on = function (event, action) {
+                    socketIoController.startConnection("localhost");
+                    socketIoController.socket.on = function (event, action) {
                         expect(event).to.deep.equal("chat-message")
                     };
-                    connectionController.setMessageReceivedEvent(function () {
+                    socketIoController.setMessageReceivedEvent(function () {
                     });
                 });
 
                 it("should set the action in the event", function () {
-                    connectionController.startConnection("localhost");
+                    socketIoController.startConnection("localhost");
                     var fakeEvent = function () {
                     };
-                    connectionController.socket.on = function (event, action) {
+                    socketIoController.socket.on = function (event, action) {
                         expect(action).to.deep.equal(fakeEvent)
                     };
-                    connectionController.setMessageReceivedEvent(fakeEvent);
+                    socketIoController.setMessageReceivedEvent(fakeEvent);
                 });
             });
 
             describe("#sendMessageEvent", function () {
-                var connectionController;
+                var socketIoController;
 
                 beforeEach(function () {
                     var stubSocket = {
@@ -147,36 +147,36 @@ define(['chai','connectionController'],function(chai,ConnectionController) {
                             return stubSocket
                         }
                     };
-                    connectionController = new ConnectionController(stubIo);
+                    socketIoController = new ScocketIoController(stubIo);
                 });
 
                 it("should thrown error if isn't connected", function () {
                     expect(function () {
-                        connectionController.sendMessageEvent("test")
+                        socketIoController.sendMessageEvent("test")
                     }).to.throw(Error);
                 });
 
                 it("should thrown error if the message doesn't exist", function () {
-                    connectionController.startConnection("localhost");
+                    socketIoController.startConnection("localhost");
                     expect(function () {
-                        connectionController.sendMessageEvent();
+                        socketIoController.sendMessageEvent();
                     }).to.throw(Error);
                 });
 
                 it("should send 'chat-message' event", function () {
-                    connectionController.startConnection("localhost");
-                    connectionController.socket.emit = function (event, message) {
+                    socketIoController.startConnection("localhost");
+                    socketIoController.socket.emit = function (event, message) {
                         expect(event).to.deep.equal("chat-message");
                     };
-                    connectionController.sendMessageEvent("test");
+                    socketIoController.sendMessageEvent("test");
                 });
 
                 it("should send the message in the event", function () {
-                    connectionController.startConnection("localhost");
-                    connectionController.socket.emit = function (event, message) {
+                    socketIoController.startConnection("localhost");
+                    socketIoController.socket.emit = function (event, message) {
                         expect(message).to.deep.equal("test");
                     };
-                    connectionController.sendMessageEvent("test");
+                    socketIoController.sendMessageEvent("test");
                 });
             });
         });

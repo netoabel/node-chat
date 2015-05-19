@@ -1,6 +1,6 @@
 'use strict';
 
-define(['chai','messageController','connectionController'],function(chai,MessageController,ConnectionController) {
+define(['chai','messageController','socketIoController'],function(chai,MessageController,ConnectionController) {
 
     return function() {
         var expect = chai.expect;
