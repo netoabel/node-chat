@@ -1,43 +1,51 @@
 "use strict";
 //var socket = io.connect('ws://localhost:3000');
 
-define(["connectionController"],function(connectionController) {
+define(["connectionInterface"],function(ConnectionInterface) {
+
+    var connectionInterface = Object.create(ConnectionInterface);
+
     function SocketIoController(ioClass) {
-        this.io = ioClass;
-        this.socket = null;
+        var io = ioClass;
+        this._socket = null;
+
+        Object.defineProperty(this,"io",{
+            get:function(){
+                return io;
+            }
+        });
     }
 
     SocketIoController.prototype = {
         constructor: SocketIoController,
 
-        startConnection: Object.create(connectionController).startConnection = function (uri) {
-            this.socket = this.io.connect(uri);
+        startConnection: connectionInterface.startConnection = function (uri) {
+            this._socket = this.io.connect(uri);
         },
 
-        setMessageReceivedEvent: function (event) {
-            if (this.isConnected() && typeof(event) === "function") {
-                this.socket.on('chat-message', event)
-            } else {
-                throw Error("fail in creating the event");
-            }
-        },
 
-        sendMessageEvent: function (message) {
-            if (this.isConnected() && message) {
-                this.socket.emit('chat-message', message);
-            } else {
-                throw  Error("fail in send event")
-            }
-        },
-
-        isConnected: Object.create(connectionController).startConnection = function() {
+        isConnected: connectionInterface.isConnected = function() {
             var connected = false;
-            if (this.socket && this.socket.connected) {
+            if (this._socket && this._socket.connected) {
                 connected = true;
             }
             return connected;
-        }
+        },
 
+        registerMessenger: connectionInterface.registerMessenger = function(messenger){
+            var self = this;
+            if (this.isConnected()) {
+                this._socket.on('chat-message', messenger.onMessageReceived);
+
+                var base = messenger.sendMessage.bind(messenger);
+                messenger.sendMessage = function (message) {
+                    base(message);
+                    self._socket.emit('chat-message', message);
+                };
+            } else{
+                throw  new Error('socket is disconnected')
+            }
+        }
     };
     return SocketIoController;
 });
