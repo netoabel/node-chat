@@ -9,7 +9,7 @@ define(['chai','messenger','socketIoController'],function(chai,Messenger,Connect
 
             describe("Constructor", function () {
 
-                it("should set listener if provided", function () {
+                it("should set the provided listener ", function () {
                     var listener = {};
                     var socketMessenger = new Messenger(listener);
                     expect(socketMessenger.listener).to.equal(listener);
