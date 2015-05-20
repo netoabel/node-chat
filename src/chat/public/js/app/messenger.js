@@ -3,12 +3,12 @@ define(['messengerInterface'],function(MessengerInterface) {
 
     var messengerInterface = Object.create(MessengerInterface);
 
-    function SocketMessenger(listener) {
+    function Messenger(listener) {
         this.listener = listener;
     }
 
-    SocketMessenger.prototype = {
-        constructor: SocketMessenger,
+    Messenger.prototype = {
+        constructor: Messenger,
 
         onMessageReceived: messengerInterface.sendMessageEvent = function (message) {
             this.listener.update(message);
@@ -19,5 +19,5 @@ define(['messengerInterface'],function(MessengerInterface) {
         }
 
     };
-    return SocketMessenger;
+    return Messenger;
 });
