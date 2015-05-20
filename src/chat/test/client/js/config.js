@@ -11,8 +11,8 @@ require.config({
     paths: {
 
         //libs
-        jquery: 'library/jquery-2.1.3.min',
-        chai:'library/chai',
+        jquery: 'lib/jquery-2.1.3.min',
+        chai:'lib/chai',
 
         //tests
         socketIoControllerTests: 'app/socketIoController.test',
