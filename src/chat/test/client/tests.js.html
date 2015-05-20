@@ -7,14 +7,14 @@
 <body>
 <div id="mocha"></div>
 
-<script src="js/library/require.js" type="text/javascript"></script>
-<script src="js/library/mocha.js" type="text/javascript"></script>
+<script src="js/lib/require.js" type="text/javascript"></script>
+<script src="js/lib/mocha.js" type="text/javascript"></script>
 <script src="js/config.js" type="text/javascript"></script>
 <script type="text/javascript">
     require(['socketIoControllerTests',
-                'socketMessengerTests'],function(connectionControllerTest,socketMessengerTest){
+                'messengerTests'],function(connectionControllerTest,messengerTest){
         connectionControllerTest();
-        socketMessengerTest();
+        messengerTest();
         mocha.run();
     });
 </script>
