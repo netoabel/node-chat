@@ -1,50 +1,52 @@
 'use strict';
 
-var UserList = (function () {
+var User = require('./user');
 
-  var _ = new WeakMap();
+function UserList(){
+  this._list = [];
+  //var list = [];
 
-  var User = require('./user');
+  //Object.defineProperties(this, {
+  //  "_list": {
+  //    get: function () {
+  //      return list;
+  //    }
+  //  }
+  //});
+}
 
-  //TODO:     Find another way to declare private variables. This doesn't work. By doing it this way, we are declaring
-  //TODO      private variables that are shared to all instances of this class
+UserList.prototype = {
+  constructor: UserList,
 
-  function UserList(){
-    _[this] = {
-      list: []
-    };
-  }
-
-  UserList.prototype = {
-    constructor: UserList,
-
-    add: function (user) {
-      if(user && user instanceof User && user.isValid()) {
-        _[this].list.push(user);
-      }
-    },
-
-    remove: function (userId) {
-      _[this].list = _[this].list.filter(function (user) {
-        return user.getUserId() !== userId;
-      });
-    },
-
-    get: function (userId) {
-      var result = _[this].list.filter(function (user) {
-        return user.getUserId() === userId;
-      });
-
-      if(result) {
-        return result[0];
-      }
-    },
-
-    getList: function () {
-      return _[this].list;
+  add: function (user) {
+    if(user && user instanceof User) {
+      this._list.push(user);
     }
-  };
+  },
 
-  module.exports = UserList;
+  remove: function (data) {
+    this._list = this._list.filter(function (user) {
+      if(data.userId) {
+        return user.getUserId() !== data.userId;
+      }else if(data.connectionId){
+        return user.getConnectionId() !== data.connectionId;
+      }
+    });
+  },
 
-}());
+  get: function (userId) {
+    var result = this._list.filter(function (user) {
+      return user.getUserId() === userId;
+    });
+
+    if(result) {
+      return result[0];
+    }
+  },
+
+  getList: function () {
+    return this._list;
+  }
+};
+
+module.exports = UserList;

@@ -1,35 +1,52 @@
 'use strict';
 
-var User = (function () {
+function User(data){
+  if(data) {
+    //this._connectionId = data.connectionId;
+    this._userId = data.userId;
+    this._name = data.name;
+    this._connectionId = data.connectionId;
 
-  var _ = new WeakMap();
-
-  function User(data){
-    if(data) {
-      _[this] = {
-        connectionId: data.connectionId,
-        userId: data.userId,
-        name: data.name
-      };
-    }
+    //var connectionId = data.connectionId;
+    //var userId = data.userId;
+    //var name = data.name;
+    //
+    //Object.defineProperties(this, {
+    //  "_connectionId": {
+    //    get: function () {
+    //      return connectionId;
+    //    }
+    //  },
+    //
+    //  "_userId": {
+    //    get: function () {
+    //      return userId;
+    //    }
+    //  },
+    //
+    //  "_name": {
+    //    get: function () {
+    //      return name;
+    //    }
+    //  }
+    //});
   }
+}
 
-  User.prototype = {
-    constructor: User,
+User.prototype = {
+  constructor: User,
 
-    getUserId: function () {
-      return _[this].userId;
-    },
+  getUserId: function () {
+    return this._userId;
+  },
 
-    isValid: function () {
-      var result = true;
-      if(!_[this].name || !_[this].userId) {
-        result = false;
-      }
-      return result;
-    }
-  };
+  getConnectionId: function () {
+    return this._connectionId;
+  },
 
-  module.exports = User;
+  setConnectionId: function (id) {
+    this._connectionId = id;
+  }
+};
 
-}());
+module.exports = User;

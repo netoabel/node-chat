@@ -14,17 +14,9 @@ describe('Given UserList', function () {
 
     describe('With a valid user', function () {
       it('should add it to the users list', function () {
-        var user = new User({name: 'username', userId:'1'});
+        var user = new User({connectionId: '1', name: 'username', userId:'1'});
         userList.add(user);
         expect(userList.getList()).to.contain(user);
-      });
-    });
-
-    describe('With an invalid user', function () {
-      it('should not add it to the users list', function () {
-        var user = new User({name: 'User'});
-        userList.add(user);
-        expect(userList.getList()).to.not.contain(user);
       });
     });
 
@@ -44,18 +36,23 @@ describe('Given UserList', function () {
   });
 
   describe('#remove()', function () {
-    var userList, existingUserId, user;
+    var userList, existingUserId, existingConnectionId, user;
 
     beforeEach(function () {
       userList = new UserList();
-      existingUserId = 'id';
-      user = new User({name: 'username', userId: existingUserId});
+      existingConnectionId = 'id';
+      existingUserId = '2';
+      user = new User({
+        name: 'username',
+        userId: existingUserId,
+        connectionId: existingConnectionId
+      });
     });
 
     describe('With an existing user id', function () {
       it('should remove the corresponding user from users list', function () {
         userList.add(user);
-        userList.remove(existingUserId);
+        userList.remove({userId: existingUserId});
 
         expect(userList.getList()).to.be.empty;
       });
@@ -64,7 +61,25 @@ describe('Given UserList', function () {
     describe('With an non existent user id', function () {
       it('should not remove any user from users list', function () {
         userList.add(user);
-        userList.remove('non existent id');
+        userList.remove({userId: 'non existent id'});
+
+        expect(userList.getList()).to.not.be.empty;
+      });
+    });
+
+    describe('With a valid connection id', function () {
+      it('should remove the corresponding user from users list', function () {
+        userList.add(user);
+        userList.remove({connectionId: existingConnectionId});
+
+        expect(userList.getList()).to.be.empty;
+      });
+    });
+
+    describe('With a connection id that isn\'t being used by any user', function () {
+      it('shouldn\'t remove anything from the user list', function () {
+        userList.add(user);
+        userList.remove({connectionId: 'invalid connection id'});
 
         expect(userList.getList()).to.not.be.empty;
       });
@@ -72,7 +87,7 @@ describe('Given UserList', function () {
 
     describe('When the user list is empty', function () {
       it('should keep it empty', function () {
-        userList.remove(existingUserId);
+        userList.remove({userId: existingUserId});
 
         expect(userList.getList()).to.be.empty;
       });

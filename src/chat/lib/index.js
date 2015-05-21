@@ -3,11 +3,6 @@
 var http = require('http').Server();
 var io = require('socket.io')(http);
 
-//TODO: Integrate with the logon web services
-//TODO: Do it using TDD
-//TODO: Do a research about socket.io alternatives
-//TODO: Think in a better name for 'UserManager'
-
 io.on('connection', function(socket){
   socket.broadcast.emit('chat-message', 'New user connected');
   console.log('user connected');
