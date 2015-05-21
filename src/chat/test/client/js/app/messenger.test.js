@@ -9,10 +9,9 @@ define(['chai','messenger','socketIoController'],function(chai,Messenger,Connect
 
             describe("Constructor", function () {
 
-                it("should set the provided listener ", function () {
-                    var listener = {};
-                    var socketMessenger = new Messenger(listener);
-                    expect(socketMessenger.listener).to.equal(listener);
+                it("should have a null observer ", function () {
+                    var socketMessenger = new Messenger();
+                    expect(socketMessenger.observer).to.be.null;
                 });
             });
 
@@ -26,7 +25,6 @@ define(['chai','messenger','socketIoController'],function(chai,Messenger,Connect
                         }
                     };
                     var messenger = new Messenger(stubListener);
-
                     messenger.onMessageReceived(testMessage);
                 });
 
