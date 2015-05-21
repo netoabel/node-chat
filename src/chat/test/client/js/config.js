@@ -17,10 +17,12 @@ require.config({
         //tests
         socketIoControllerTests: 'app/socketIoController.test',
         messengerTests: 'app/messenger.test',
+        chatViewTests:'app/chatView.test',
 
         //app
         socketIoController:'../../../public/js/app/socketIoController',
         messenger:'../../../public/js/app/messenger',
+        chatView:'../../../public/js/app/chatView',
         connectionInterface:'../../../public/js/app/connectionInterface',
         messengerInterface:'../../../public/js/app/messengerInterface'
     },

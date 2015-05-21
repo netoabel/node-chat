@@ -12,9 +12,11 @@
 <script src="js/config.js" type="text/javascript"></script>
 <script type="text/javascript">
     require(['socketIoControllerTests',
-                'messengerTests'],function(connectionControllerTest,messengerTest){
+                'messengerTests',
+                 'chatViewTests'],function(connectionControllerTest,messengerTest,chatViewTests){
         connectionControllerTest();
         messengerTest();
+        chatViewTests();
         mocha.run();
     });
 </script>
