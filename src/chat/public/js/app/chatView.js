@@ -8,8 +8,6 @@ define(['jquery'] ,function($){
     function ChatView(messenger,messagesUl){
         this.messenger = messenger;
         this.messagesUl = messagesUl;
-
-        messenger.registerObserver(this);
     }
 
     ChatView.prototype = {

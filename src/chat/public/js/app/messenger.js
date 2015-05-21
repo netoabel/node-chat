@@ -16,7 +16,7 @@ define(['messengerInterface'],function(MessengerInterface) {
             }
         },
 
-        registerObserver: function(observer){
+        setObserver: function(observer){
             this.observer = observer;
         },
 

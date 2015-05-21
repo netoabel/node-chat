@@ -23,13 +23,6 @@ define(['chai','jquery','chatView','messenger'],function(chai,$,ChatView,Messeng
 
                     expect(chatView.messagesUl).to.deep.equal(messagesUl);
                 });
-                it("should call register in the messenger",function(){
-                    var messageUl = $('<ul>');
-                    var messenger = new Messenger();
-                    var chatView = new ChatView(messenger,messageUl);
-
-                    expect(chatView.messenger.observer).to.deep.equal(chatView);
-                });
             });
 
             describe("#registerInputField", function () {
