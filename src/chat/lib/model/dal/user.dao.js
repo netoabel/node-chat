@@ -1,5 +1,4 @@
 'use strict';
-var Promise = require('bluebird');
 var User = require('../user.js');
 
 function UserDAO() {

@@ -9,9 +9,9 @@ function SocketIoConnectionDAO(){
 SocketIoConnectionDAO.prototype = {
   constructor: SocketIoConnectionDAO,
 
-  registerServer: function (server) {
+  registerDAO: function (connectionDAO) {
     io.on('connection', function (data) {
-      server.onConnect(data, null);
+      connectionDAO.onConnect(data, null);
     });
   }
 };

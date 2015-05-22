@@ -33,7 +33,7 @@ UserDAO.prototype = {
         resolve(user);
 
       });
-    }
+    };
   }
 };
 
