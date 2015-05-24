@@ -1,23 +1,25 @@
 'use strict';
 
-var http = require('http').Server();
-var io = require('socket.io')(http);
+var ConnectionDAO = require('./model/dal/connection.dao.js'),
+    SocketioConnectionDAO = require('./model/dal/socketio/socketio-connection.dao.js'),
 
-io.on('connection', function(socket){
-  socket.broadcast.emit('chat-message', 'New user connected');
-  console.log('user connected');
+    MessageDAO = require('./model/dal/message.dao.js'),
+    SocketioMessageDAO = require('./model/dal/socketio/socketio-message.dao.js'),
 
-  socket.on('chat-message', function(msg){
-    console.log('message: ' + msg);
-    socket.broadcast.emit('chat-message', msg);
-  });
+    StubUserDAO = require('./model/dal/stub/stub-user.dao.js'),
+    UserDAO = require('./model/dal/user.dao.js'),
 
-  socket.on('disconnect', function(){
-    socket.broadcast.emit('chat-message', 'User disconnected');
-    console.log('user disconnected');
-  });
-});
+    User = require('./model/user'),
+    UserList = require('./model/user-list'),
 
-http.listen(3000, function () {
-  console.log('WebSocket server listening for connections on port 3000');
-});
+    userList = new UserList(),
+    userDAO = new UserDAO(),
+    stubUserDAO = new StubUserDAO(),
+    connectionDAO = new ConnectionDAO(userList, userDAO),
+    socketioConnectionDAO = new SocketioConnectionDAO(),
+    messageDAO = new MessageDAO(userList, userDAO),
+    socketioMessageDAO = new SocketioMessageDAO();
+
+stubUserDAO.setup(userDAO);
+socketioConnectionDAO.setup(connectionDAO, messageDAO);
+socketioMessageDAO.setup(messageDAO);

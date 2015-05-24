@@ -8,7 +8,7 @@ function ConnectionDAO(users, dao){
 ConnectionDAO.prototype = {
   constructor: ConnectionDAO,
 
-  onConnect: function (data, callback) {
+  connect: function (data, callback) {
     var self = this;
     this.dao.getUser(data.userId).then(function (result) {
       if(result && data.connectionId) {
@@ -21,7 +21,7 @@ ConnectionDAO.prototype = {
     });
   },
   
-  onDisconnect: function (data, callback) {
+  disconnect: function (data, callback) {
     this.users.remove({connectionId: data.connectionId});
     if(callback){
       callback();

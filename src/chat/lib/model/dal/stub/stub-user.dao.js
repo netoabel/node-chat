@@ -12,7 +12,7 @@ function UserDAO() {
 UserDAO.prototype = {
   constructor: UserDAO,
 
-  registerDAO: function (dao) {
+  setup: function (dao) {
     var self = this;
     var getUser = dao.getUser;
 

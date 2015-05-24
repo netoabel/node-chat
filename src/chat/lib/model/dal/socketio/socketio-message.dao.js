@@ -9,17 +9,13 @@ function SocketIoMessageDAO(){
 SocketIoMessageDAO.prototype = {
   constructor: SocketIoMessageDAO,
 
-  registerDAO: function (dao) {
+  setup: function (dao) {
     var broadcast = dao.broadcast;
 
     dao.broadcast = function (message) {
       broadcast(message);
-      io.emit('message', msg);
+      io.emit('chat-message', message);
     };
-
-    io.on('message', function (data) {
-      dao.broadcast(data, null);
-    });
   }
 };
 

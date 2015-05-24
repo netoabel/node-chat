@@ -27,13 +27,13 @@ describe('Given ConnectionDAO', function () {
       stubList.pop();
     };
 
-    stubUserDAO.registerDAO(userDAO);
+    stubUserDAO.setup(userDAO);
   });
 
-  describe('#onConnect()', function () {
+  describe('#connect()', function () {
     describe('With valid user id and connection id', function () {
       it('should add a user to the user list', function (done) {
-        connectionDAO.onConnect({userId: '1', connectionId: '2'}, function () {
+        connectionDAO.connect({userId: '1', connectionId: '2'}, function () {
           expect(stubList).to.not.be.empty;
           expect(stubList[0]).to.be.instanceOf(User);
           done();
@@ -41,14 +41,14 @@ describe('Given ConnectionDAO', function () {
       });
 
       it('should add a user with the given user id to the user list', function (done) {
-        connectionDAO.onConnect({userId: '1', connectionId: '2'}, function () {
+        connectionDAO.connect({userId: '1', connectionId: '2'}, function () {
           expect(stubList[0].getUserId()).to.equal('1');
           done();
         });
       });
 
       it('should add a user with the given connection id to the user list', function (done) {
-        connectionDAO.onConnect({userId: '1', connectionId: '2'}, function () {
+        connectionDAO.connect({userId: '1', connectionId: '2'}, function () {
           expect(stubList[0].getConnectionId()).to.equal('2');
           done();
         });
@@ -57,7 +57,7 @@ describe('Given ConnectionDAO', function () {
 
     describe('With an inexistent user id', function () {
       it('should\'nt add anything to the user list', function (done) {
-        connectionDAO.onConnect({userId: 'inexistent user id', connectionId: '2'}, function () {
+        connectionDAO.connect({userId: 'inexistent user id', connectionId: '2'}, function () {
           expect(stubList).to.be.empty;
           done();
         });
@@ -66,7 +66,7 @@ describe('Given ConnectionDAO', function () {
 
     describe('With no user id', function () {
       it('should\'nt add anything to the user list', function (done) {
-        connectionDAO.onConnect({connectionId: '2'}, function () {
+        connectionDAO.connect({connectionId: '2'}, function () {
           expect(stubList).to.be.empty;
           done();
         });
@@ -75,7 +75,7 @@ describe('Given ConnectionDAO', function () {
 
     describe('With no connection id', function () {
       it('should\'nt add anything to the user list', function (done) {
-        connectionDAO.onConnect({userId: '1'}, function () {
+        connectionDAO.connect({userId: '1'}, function () {
           expect(stubList).to.be.empty;
           done();
         });
@@ -83,11 +83,11 @@ describe('Given ConnectionDAO', function () {
     });
   });
 
-  describe('#onDisconnect()', function () {
+  describe('#disconnect()', function () {
     describe('With a valid connection id', function () {
       it('should remove the corresponding user from the user list', function (done) {
-        connectionDAO.onConnect({userId: '1', connectionId: '2'}, function () {
-          connectionDAO.onDisconnect({connectionId: '2'}, function () {
+        connectionDAO.connect({userId: '1', connectionId: '2'}, function () {
+          connectionDAO.disconnect({connectionId: '2'}, function () {
             expect(stubList).to.be.empty;
             done();
           });
