@@ -25,7 +25,7 @@ define(['chai','socketIoController','messengerInterface'],function(chai,SocketIo
                 it("should create a connection with the URL provided", function () {
                     var fakeUri = 'localhost';
                     var stubIo = {
-                        connect: function (uri) {
+                        connect: function (uri,query) {
                             expect(uri).to.equal(fakeUri);
                         }
                     };
@@ -33,12 +33,12 @@ define(['chai','socketIoController','messengerInterface'],function(chai,SocketIo
                     socketIoController.startConnection(fakeUri);
                 });
 
-                it("should send the userId", function () {
+                it("should send a object with the userId", function () {
                     var fakeUri = 'localhost';
-                    var fakeId;
+                    var fakeId = '123';
                     var stubIo = {
-                        connect: function (uri,query) {
-                            expect(query.userId).to.equal(fakeId);
+                        connect: function (uri,parameter) {
+                            expect(parameter.query).to.equal(fakeId);
                         }
                     };
                     var socketIoController = new SocketIoController(stubIo);
