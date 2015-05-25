@@ -34,7 +34,6 @@ define(['jquery'] ,function($){
                 if(event.keyCode === 13) {
                     var message = $(this).val();
                     $(this).val('');
-                    $(this).blur();
                     if (message) {
                         self.messenger.sendMessage(message);
                     }
