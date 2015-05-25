@@ -36,15 +36,6 @@ require(['jquery','socketIo','socketIoController','messenger','chatView'],
         var messageField = $('#message-field');
         var messageUl = $('#messages');
 
-        var socketIoController = new SocketIoController(io);
-        socketIoController.startConnection("ws://localhost:3000",$("#userID").val());
-
-        var messenger = new Messenger();
-        var chatView = new ChatView(messenger,messageUl);
-        socketIoController.registerMessenger(messenger);
-        chatView.registerInputField(messageField);
-        messenger.setObserver(chatView);
-
         messageField.focus(function (e) {
             $('#chat').css('border-color', '#d1eaf2');
         });
@@ -52,14 +43,15 @@ require(['jquery','socketIo','socketIoController','messenger','chatView'],
             $('#chat').css('border-color', 'transparent');
         });
 
+        var socketIoController = new SocketIoController(io);
+        socketIoController.startConnection("ws://localhost:3000",$("#userID").val());
 
-        $('html').keydown(function (event) {
-            if (event.keyCode === 13) {
-                if(!messageField.is(':focus')) {
-                    messageField.focus();
-                }else{
-                    messageField.blur();
-                }
-            }
-        });
+        var messenger = new Messenger();
+        var chatView = new ChatView(messenger,messageUl);
+        socketIoController.registerMessenger(messenger);
+
+        chatView.registerInputField(messageField);
+        chatView.registerFocusOnEnter($('html'),messageField);
+        messenger.setObserver(chatView);
+
     });

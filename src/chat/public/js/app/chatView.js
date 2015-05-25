@@ -32,13 +32,25 @@ define(['jquery'] ,function($){
             var self = this;
             field.keydown(function(event) {
                 if(event.keyCode === 13) {
-                    var message = $(this).val();
-                    $(this).val('');
+                    var message = field.val();
+                    field.val('');
                     if (message) {
                         self.messenger.sendMessage(message);
                     }
                 }
             });
+        },
+
+        registerFocusOnEnter: function (context, item) {
+          context.keydown(function (event) {
+              if (event.keyCode === 13) {
+                  if(!item.is(':focus')) {
+                      item.focus();
+                  }else{
+                      item.blur();
+                  }
+              }
+          });
         },
 
        getCurrentHourAndMinute: function () {
