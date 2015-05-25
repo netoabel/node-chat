@@ -40,7 +40,7 @@ define(["connectionInterface"],function(ConnectionInterface) {
                 var base = messenger.sendMessage.bind(messenger);
                 messenger.sendMessage = function (message) {
                     base(message);
-                    self._socket.emit('chat-message', message);
+                    self._socket.emit('chat-message',{message: message});
                 };
             } else{
                 throw  new Error('socket is disconnected')

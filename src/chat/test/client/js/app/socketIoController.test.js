@@ -177,8 +177,8 @@ define(['chai','socketIoController','messengerInterface'],function(chai,SocketIo
 
                 it("should in the overwrite function emit to socket the message", function (done) {
                     var testMessage = "test";
-                    stubSocket.emit = function(event,msg){
-                        expect(msg).to.equal(testMessage);
+                    stubSocket.emit = function(event,value){
+                        expect(value.message).to.equal(testMessage);
                         done();
                     };
                     socketIoController.startConnection();
