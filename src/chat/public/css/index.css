@@ -1,7 +1,5 @@
 body{
     background-color: #021b34;
-    height: 700px;
-    width: 1366px;
     margin: 0px;
     padding: 0px;
 }
@@ -25,7 +23,15 @@ body{
     line-height: 19px;
     padding: 0 0 15px 0;
     font-weight: lighter;
-    word-break: break-all;
+
+    white-space: pre;           /* CSS 2.0 */
+    white-space: pre-wrap;      /* CSS 2.1 */
+    white-space: pre-line;      /* CSS 3.0 */
+    white-space: -pre-wrap;     /* Opera 4-6 */
+    white-space: -o-pre-wrap;   /* Opera 7 */
+    white-space: -moz-pre-wrap; /* Mozilla */
+    white-space: -hp-pre-wrap;  /* HP Printers */
+    word-wrap: break-word;      /* IE 5+ */
 }
 
 #msg-container {
@@ -56,23 +62,23 @@ body{
     border-top: solid 5px #d1eaf2;
 }
 
-::-webkit-scrollbar {
+#msg-container::-webkit-scrollbar {
     width: 6px;
     height: 6px;
 }
 
-::-webkit-scrollbar-track-piece {
+#msg-container::-webkit-scrollbar-track-piece {
     background-color:rgba(0,0,0,0.5);
     -webkit-border-radius: 6px;
 }
 
-::-webkit-scrollbar-thumb:vertical {
+#msg-container::-webkit-scrollbar-thumb:vertical {
     height: 6px;
     background-color: #002d44;
     -webkit-border-radius: 6px;
 }
 
-::-webkit-scrollbar-thumb:horizontal {
+#msg-container::-webkit-scrollbar-thumb:horizontal {
     width: 6px;
     background-color: #002d44;
     -webkit-border-radius: 6px;

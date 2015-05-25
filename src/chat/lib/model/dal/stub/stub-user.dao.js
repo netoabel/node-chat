@@ -4,8 +4,8 @@ var User = require('../../user.js');
 
 function UserDAO() {
   this.users = [
-    { userId: '1', name: 'User 1' },
-    { userId: '2', name: 'User 2' }
+    { userId: '1', name: 'Roberto Júnior' },
+    { userId: '2', name: 'Bruno Alves' }
   ];
 }
 
