@@ -16,6 +16,7 @@ SocketIoConnectionDAO.prototype = {
       connectionDAO.connect({ userId: self._userId, connectionId: client.id }, function (user) {
         client.on('chat-message', function (data) {
           data.username = user.getName();
+          console.log(data)
           messageDAO.broadcast(data, null);
         });
       });

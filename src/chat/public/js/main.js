@@ -44,4 +44,11 @@ require(['jquery','socketIo','socketIoController','messenger','chatView'],
         socketIoController.registerMessenger(messenger);
         chatView.registerInputField(messageField);
         messenger.setObserver(chatView);
+
+        $('#message-field').focus(function (e) {
+            $('#chat').css('border-color', '#d1eaf2');
+        });
+        $('#message-field').blur(function (e) {
+            $('#chat').css('border-color', 'transparent');
+        });
     });

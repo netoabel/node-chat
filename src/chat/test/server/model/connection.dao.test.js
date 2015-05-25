@@ -53,6 +53,13 @@ describe('Given ConnectionDAO', function () {
           done();
         });
       });
+
+      it('should result in a user', function (done) {
+        connectionDAO.connect({userId: '1', connectionId: '2'}, function (user) {
+          expect(user).to.be.instanceOf(User);
+          done();
+        });
+      });
     });
 
     describe('With an inexistent user id', function () {

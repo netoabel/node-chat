@@ -13,14 +13,14 @@ define(['jquery'] ,function($){
     ChatView.prototype = {
         constructor: ChatView,
 
-        update: function(data){
+        update: function(message){
             var messageLi = $('<li>');
             var messageSpan = $('<span>');
 
             messageSpan.text("[" + this.getCurrentHourAndMinute() + "] ");
-            messageSpan.append($('<b>').text(data.userName + " :"));
+            messageSpan.append($('<b>').text(message.username + " :"));
             messageLi.append(messageSpan);
-            messageLi.append(" " + data.message);
+            messageLi.append(" " + message.message);
             this.messagesUl.append(messageLi);
         },
 

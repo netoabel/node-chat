@@ -6,17 +6,6 @@ body{
     padding: 0px;
 }
 
-/*
-@font-face{ 
-	font-family: 'armata-regular-webfont';
-	src: url('armata-regular-webfont.eot');
-	src: url('armata-regular-webfont.eot?#iefix') format('embedded-opentype'),
-	     url('armata-regular-webfont.woff') format('woff'),
-	     url('armata-regular-webfont.ttf') format('truetype'),
-	     url('armata-regular-webfont.svg#webfont') format('svg');
-}
-*/
-
 #chat{
     width:340px;
     background-color: rgba(0,0,0,0.1);
@@ -24,17 +13,21 @@ body{
     margin-top: 17px;
     padding: 0px;
     display: block;
+    border: solid 7px transparent;
 }
 
 #messages {
     width: 300px;
+    height: 250px;
     display: block;
-    font-family: calibri;
+    font-family: Armata;
     font-size: 14px;
     line-height: 19px;
-    padding: 0px;
+    padding: 0 0 15px 0;
     margin: 10px 20px 0px 20px;
     font-weight: lighter;
+    overflow: auto;
+    word-break: break-all;
 }
 
 
@@ -48,6 +41,7 @@ body{
 }
 
 #message-field {
+    font-family: Armata;
     background-color:rgba(0,0,0,0.5);
     border:none;
     color:white;
@@ -60,8 +54,6 @@ body{
     border-top: solid 5px #d1eaf2;
 }
 
-.mfocus{
-    border: solid 7px #d1eaf2;
-    margin: 0px !important;
-    padding: 0px !important;
-}
+/*.mfocus{*/
+    /*border: solid 7px #d1eaf2;*/
+/*}*/
