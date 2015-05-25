@@ -24,12 +24,14 @@ body{
     font-size: 14px;
     line-height: 19px;
     padding: 0 0 15px 0;
-    margin: 10px 20px 0px 20px;
     font-weight: lighter;
-    overflow: auto;
     word-break: break-all;
 }
 
+#msg-container {
+    overflow: auto;
+    margin: 10px 10px 10px 10px;
+}
 
 #messages li{
     list-style: none;
@@ -54,6 +56,24 @@ body{
     border-top: solid 5px #d1eaf2;
 }
 
-/*.mfocus{*/
-    /*border: solid 7px #d1eaf2;*/
-/*}*/
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color:rgba(0,0,0,0.5);
+    -webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+    height: 6px;
+    background-color: #002d44;
+    -webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+    width: 6px;
+    background-color: #002d44;
+    -webkit-border-radius: 6px;
+}

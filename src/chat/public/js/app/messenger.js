@@ -12,7 +12,6 @@ define(['messengerInterface'],function(MessengerInterface) {
 
         onMessageReceived: messengerInterface.onMessageReceived = function (message) {
             if(this.observer) {
-                console.log(message);
                 this.observer.update(message);
             }
         },
