@@ -10,7 +10,7 @@ define(['messengerInterface'],function(MessengerInterface) {
     Messenger.prototype = {
         constructor: Messenger,
 
-        onMessageReceived: messengerInterface.sendMessageEvent = function (message) {
+        onMessageReceived: messengerInterface.onMessageReceived = function (message) {
             if(this.observer) {
                 this.observer.update(message);
             }
