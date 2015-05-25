@@ -19,8 +19,8 @@ define(["connectionInterface"],function(ConnectionInterface) {
     SocketIoController.prototype = {
         constructor: SocketIoController,
 
-        startConnection: connectionInterface.startConnection = function (uri) {
-            this._socket = this.io.connect(uri);
+        startConnection: connectionInterface.startConnection = function (uri,userId) {
+            this._socket = this.io.connect(uri,{query: userId });
         },
 
 

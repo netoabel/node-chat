@@ -33,6 +33,18 @@ define(['chai','socketIoController','messengerInterface'],function(chai,SocketIo
                     socketIoController.startConnection(fakeUri);
                 });
 
+                it("should send the userId", function () {
+                    var fakeUri = 'localhost';
+                    var fakeId;
+                    var stubIo = {
+                        connect: function (uri,query) {
+                            expect(query.userId).to.equal(fakeId);
+                        }
+                    };
+                    var socketIoController = new SocketIoController(stubIo);
+                    socketIoController.startConnection(fakeUri,fakeId);
+                });
+
                 it("should set the socket", function () {
                     var stubSocket = {};
                     var stubIo = {
