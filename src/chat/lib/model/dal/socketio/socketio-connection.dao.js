@@ -1,9 +1,7 @@
 'use strict';
 
-var http = require('http').Server();
-var io = require('socket.io')(http);
-
-function SocketIoConnectionDAO(){
+function SocketIoConnectionDAO(io){
+  this._io = io;
   this._userId = undefined;
 }
 
@@ -12,24 +10,20 @@ SocketIoConnectionDAO.prototype = {
 
   setup: function (connectionDAO, messageDAO) {
     var self = this;
-    io.on('connection', function (client) {
-      console.log('New client connected. Client id: ' + client.id);
+    self._io.on('connection', function (client) {
+      console.log('New client connected.\nClient id: ' + client.id + '\nUser id: ' + self._userId);
 
-      client.on('chat-message', function (data) {
-        messageDAO.broadcast(data, null);
+      connectionDAO.connect({ userId: self._userId, connectionId: client.id }, function (user) {
+        client.on('chat-message', function (data) {
+          data.username = user.getName();
+          messageDAO.broadcast(data, null);
+        });
       });
-
-      connectionDAO.connect({ userId: self._userId, connectionId: client.id }, null);
     });
 
-    io.set('authorization', function (handshakeData, cb) {
-      self._userId = handshakeData._query.userId;
-      cb(null, true);
-    });
-
-    //TODO: It probably shouldn't be here
-    http.listen(3000, function () {
-      console.log('WebSocket server listening for connections on port 3000');
+    self._io.use(function (socket, next) {
+      self._userId = socket.request._query.userId;
+      next();
     });
   }
 };

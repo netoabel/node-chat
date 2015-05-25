@@ -16,7 +16,7 @@ ConnectionDAO.prototype = {
         self.users.add(result);
       }
       if(callback){
-        callback();
+        callback(result);
       }
     });
   },

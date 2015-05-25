@@ -1,9 +1,7 @@
 'use strict';
 
-var http = require('http').Server();
-var io = require('socket.io')(http);
-
-function SocketIoMessageDAO(){
+function SocketIoMessageDAO(io){
+  this._io = io;
 }
 
 SocketIoMessageDAO.prototype = {
@@ -11,10 +9,11 @@ SocketIoMessageDAO.prototype = {
 
   setup: function (dao) {
     var broadcast = dao.broadcast;
+    var self = this;
 
     dao.broadcast = function (message) {
       broadcast(message);
-      io.emit('chat-message', message);
+      self._io.emit('chat-message', message);
     };
   }
 };

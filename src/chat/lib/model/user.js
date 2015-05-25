@@ -46,6 +46,10 @@ User.prototype = {
 
   setConnectionId: function (id) {
     this._connectionId = id;
+  },
+
+  getName: function () {
+    return this._name;
   }
 };
 

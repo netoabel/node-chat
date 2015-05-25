@@ -6,7 +6,7 @@ function MessageDAO() {
 MessageDAO.prototype = {
   constructor: MessageDAO,
 
-  broadcast: function (userId) {
+  broadcast: function (message) {
   }
 };
 

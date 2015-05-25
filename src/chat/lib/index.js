@@ -1,5 +1,12 @@
 'use strict';
 
+var http = require('http').Server();
+var io = require('socket.io')(http);
+
+http.listen(3000, function () {
+  console.log('WebSocket server listening for connections on port 3000');
+});
+
 var ConnectionDAO = require('./model/dal/connection.dao.js'),
     SocketioConnectionDAO = require('./model/dal/socketio/socketio-connection.dao.js'),
 
@@ -16,9 +23,9 @@ var ConnectionDAO = require('./model/dal/connection.dao.js'),
     userDAO = new UserDAO(),
     stubUserDAO = new StubUserDAO(),
     connectionDAO = new ConnectionDAO(userList, userDAO),
-    socketioConnectionDAO = new SocketioConnectionDAO(),
+    socketioConnectionDAO = new SocketioConnectionDAO(io),
     messageDAO = new MessageDAO(userList, userDAO),
-    socketioMessageDAO = new SocketioMessageDAO();
+    socketioMessageDAO = new SocketioMessageDAO(io);
 
 stubUserDAO.setup(userDAO);
 socketioConnectionDAO.setup(connectionDAO, messageDAO);
