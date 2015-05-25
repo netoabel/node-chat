@@ -45,10 +45,21 @@ require(['jquery','socketIo','socketIoController','messenger','chatView'],
         chatView.registerInputField(messageField);
         messenger.setObserver(chatView);
 
-        $('#message-field').focus(function (e) {
+        messageField.focus(function (e) {
             $('#chat').css('border-color', '#d1eaf2');
         });
-        $('#message-field').blur(function (e) {
+        messageField.blur(function (e) {
             $('#chat').css('border-color', 'transparent');
+        });
+
+
+        $('html').keydown(function (event) {
+            if (event.keyCode === 13) {
+                if(!messageField.is(':focus')) {
+                    messageField.focus();
+                }else{
+                    messageField.blur();
+                }
+            }
         });
     });
