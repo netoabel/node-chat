@@ -35,7 +35,7 @@ define(["connectionInterface"],function(ConnectionInterface) {
         registerMessenger: connectionInterface.registerMessenger = function(messenger){
             var self = this;
             //if (this.isConnected()) {
-                this._socket.on('chat-message', messenger.onMessageReceived);
+                this._socket.on('chat-message', messenger.onMessageReceived.bind(messenger));
 
                 var base = messenger.sendMessage.bind(messenger);
                 messenger.sendMessage = function (message) {
