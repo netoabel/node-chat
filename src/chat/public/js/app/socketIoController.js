@@ -34,17 +34,14 @@ define(["connectionInterface"],function(ConnectionInterface) {
 
         registerMessenger: connectionInterface.registerMessenger = function(messenger){
             var self = this;
-            //if (this.isConnected()) {
-                this._socket.on('chat-message', messenger.onMessageReceived);
+            this._socket.on('chat-message', messenger.onMessageReceived);
 
-                var base = messenger.sendMessage.bind(messenger);
-                messenger.sendMessage = function (message) {
-                    base(message);
-                    self._socket.emit('chat-message',{message: message});
-                };
-            //} else{
-               // throw  new Error('socket is disconnected')
-           // }
+            var base = messenger.sendMessage.bind(messenger);
+            messenger.sendMessage = function (message) {
+                base(message);
+                self._socket.emit('chat-message',{message: message});
+            };
+
         }
     };
     return SocketIoController;

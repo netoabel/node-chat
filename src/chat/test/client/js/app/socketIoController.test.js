@@ -38,7 +38,7 @@ define(['chai','socketIoController','messengerInterface'],function(chai,SocketIo
                     var fakeId = '123';
                     var stubIo = {
                         connect: function (uri,parameter) {
-                            expect(parameter.query).to.equal(fakeId);
+                            expect(parameter.query).to.equal('userId='+fakeId);
                         }
                     };
                     var socketIoController = new SocketIoController(stubIo);
@@ -110,13 +110,6 @@ define(['chai','socketIoController','messengerInterface'],function(chai,SocketIo
                         }
                     };
                     socketIoController = new SocketIoController(stubIo);
-                });
-
-                it("should throw a error if socket is disconnected",function(){
-                    expect(function(){
-                        socketIoController.registerMessenger();
-                    }).to.throw('socket is disconnected');
-
                 });
 
                 it("should set in socket  a 'chat-message' event",function(done){
