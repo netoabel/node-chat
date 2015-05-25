@@ -1,33 +1,24 @@
 <!doctype html>
 <html>
 <head>
-    <title>Simple Node.js + WebSockets chat</title>
-    <link rel="stylesheet" href="./css/index.css"/>
-    <link rel="stylesheet" href="./css/animate.css"/>
+    <meta charset="utf-8">
+    <title>Buyttle Chat</title>
+    <link rel="stylesheet" href="css/index.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Armata' rel='stylesheet' type='text/css'>
+    <link href='armata' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<ul id="messages"></ul>
+<div id="chat" class="mfocus">
+    <ul id="messages">
 
-<form action="">
-    <input id="m" autocomplete="off"/>
-    <button>Send</button>
-</form>
+    </ul>
+    <input id="message-field" type="text" autocomplete="off" />
+</div>
 
-<script src="js/lib/socket.io.js"></script>
-<script src="js/lib/jquery-2.1.3.min.js"></script>
-
-<script>
-
-    var socket = io.connect('ws://localhost:3000', { query: "userId=1" });
-    $('form').submit(function(){
-        socket.emit('chat-message', $('#m').val());
-//        $('#messages').append($('<li>').append($('<span class="animated fadeIn">').text($('#m').val())));
-        $('#m').val('');
-        return false;
-    });
-    socket.on('chat-message', function(msg){
-        $('#messages').append($('<li>').append($('<span class="animated fadeIn">').text(msg)));
-    });
-</script>
+<div id="oi">
+    <input id="b1" type="text"  autocomplete="off"/>
+</div>
+<input id="userID"  value="id" type="hidden"/>
+<script data-main='js/main.js' src="js/lib/require.js"></script>
 </body>
 </html>

@@ -1,43 +1,67 @@
-body {
-    margin: 0;
-    padding: 0;
-    font: 13px Helvetica, Arial;
+body{
+    background-color: #021b34;
+    height: 700px;
+    width: 1366px;
+    margin: 0px;
+    padding: 0px;
 }
 
-form {
-    background: #000;
-    padding: 3px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+/*
+@font-face{ 
+	font-family: 'armata-regular-webfont';
+	src: url('armata-regular-webfont.eot');
+	src: url('armata-regular-webfont.eot?#iefix') format('embedded-opentype'),
+	     url('armata-regular-webfont.woff') format('woff'),
+	     url('armata-regular-webfont.ttf') format('truetype'),
+	     url('armata-regular-webfont.svg#webfont') format('svg');
 }
+*/
 
-form input {
-    box-sizing: border-box;
-    border: 0;
-    padding: 10px;
-    width: 85%;
-    margin: .5%;
-}
-
-form button {
-    width: 12%;
-    background: rgb(130, 224, 255);
-    border: none;
-    padding: 10px;
-    margin-left:1%;
+#chat{
+    width:340px;
+    background-color: rgba(0,0,0,0.1);
+    margin: 7px;
+    margin-top: 17px;
+    padding: 0px;
+    display: block;
 }
 
 #messages {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+    width: 300px;
+    display: block;
+    font-family: calibri;
+    font-size: 14px;
+    line-height: 19px;
+    padding: 0px;
+    margin: 10px 20px 0px 20px;
+    font-weight: lighter;
 }
 
-#messages li {
-    padding: 5px 10px;
+
+#messages li{
+    list-style: none;
+    color: white;
+}
+#messages li span{ color:#fff6af;}
+#messages li span b{
+    color: #93ff93;
 }
 
-#messages li:nth-child(odd) {
-    background: #eee;
+#message-field {
+    background-color:rgba(0,0,0,0.5);
+    border:none;
+    color:white;
+    width: 330px;
+    height: 25px;
+    padding: 5px;
+}
+
+#message-field:focus {
+    border-top: solid 5px #d1eaf2;
+}
+
+.mfocus{
+    border: solid 7px #d1eaf2;
+    margin: 0px !important;
+    padding: 0px !important;
 }

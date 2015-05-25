@@ -17,14 +17,14 @@ define(['jquery'] ,function($){
             var messageLi = $('<li>');
             var messageSpan = $('<span>');
 
-            messageSpan.text("[" + this.getCurrentHourAndMinute() + "]");
-            messageSpan.append($('<b>').text(message.nickname));
+            messageSpan.text("[" + this.getCurrentHourAndMinute() + "] ");
+            messageSpan.append($('<b>').text(message.nickname + " :"));
             messageLi.append(messageSpan);
             messageLi.append(" " + message.text);
             this.messagesUl.append(messageLi);
         },
 
-/*        isMessageValid: function (text){
+        /*isMessageValid: function (text){
             return text.replace(/\s/g, '').length;
         },*/
 
@@ -34,8 +34,9 @@ define(['jquery'] ,function($){
                 if(event.keyCode === 13) {
                     var message = $(this).val();
                     $(this).val('');
+                    $(this).blur();
                     if (message) {
-                        self.messenger.send(message);
+                        self.messenger.sendMessage(message);
                     }
                 }
             });

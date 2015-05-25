@@ -1,28 +1,57 @@
 <!doctype html>
 <html>
 <head>
-    <title>Simple Node.js + WebSockets chat</title>
-    <link rel="stylesheet" href="/css/index.css"/>
-    <link rel="stylesheet" href="/css/animate.css"/>
+    <meta charset="utf-8">
+    <title>Buyttle Chat</title>
+    <link rel="stylesheet" href="css/index.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Armata' rel='stylesheet' type='text/css'>
+    <link href='armata/' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<ul id="messages"></ul>
+<div id="chat" class="mfocus">
+    <ul id="messages">
 
-<form action="">
-    <input id="m" autocomplete="off"/>
-    <button>Send</button>
-</form>
+    </ul>
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/jquery-2.1.3.min.js"></script>
+    <input id="message-field" type="text" autocomplete="off" />
+
+</div>
+
+<div id="oi">
+    <input id="b1" type="text"  autocomplete="off"/>
+</div>
+<script src="js/lib/socket.io.js"></script>
+<script src="js/lib/jquery-2.1.3.min.js"></script>
+
 <script>
-    var socket = io();
-    $('form').submit(function(){
-        socket.emit('chat-message', $('#m').val());
-        $('#messages').append($('<li>').append($('<span class="animated fadeIn">').text($('#m').val())));
-        $('#m').val('');
-        return false;
+
+    $('#b1').keydown(function(event){
+        if(event.keyCode == 13){
+            $('#b1').blur();
+            $('#m').focus();
+        }
     });
+    var socket = io.connect("localhost");
+    $('#m').keydown(function(event){
+        if(event.keyCode == 13) {
+            if ($('#m').val().replace(/\s/g, '').length) {
+                var li = $('<li>');
+                var span = $('<span>');
+                var currentDate = new Date();
+                span.text("[" + ("0" + currentDate.getHours()).slice(-2) + ":" + ("0" + currentDate.getMinutes()).slice(-2) + "]");
+                span.append($('<b>').text(" Nickname"));
+                li.append(span);
+                li.append(" " + $(this).val());
+                $('#messages').append(li);
+                var messages = $('#messages');
+                $('#m').blur();
+                console.log($('#chat').size());
+            }
+            $('#m').val('');
+            $('#b1').focus();
+        }
+    });
+    console.log('check 1', socket.connected);
     socket.on('chat-message', function(msg){
         $('#messages').append($('<li>').text(msg));
     });
