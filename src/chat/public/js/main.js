@@ -37,11 +37,11 @@ require(['jquery','socketIo','socketIoController','messenger','chatView'],
         var messageUl = $('#messages');
 
         var socketIoController = new SocketIoController(io);
-        socketIoController.startConnection("localhost",$("#userID").val());
+        socketIoController.startConnection("ws://localhost:3000",$("#userID").val());
 
         var messenger = new Messenger();
         var chatView = new ChatView(messenger,messageUl);
         socketIoController.registerMessenger(messenger);
         chatView.registerInputField(messageField);
-
+        messenger.setObserver(chatView);
     });

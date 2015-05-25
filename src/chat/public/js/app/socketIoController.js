@@ -20,7 +20,7 @@ define(["connectionInterface"],function(ConnectionInterface) {
 
         startConnection: connectionInterface.startConnection = function (uri,userId) {
             console.log("tryign to connect at: " + uri + " with id: " +userId);
-            this._socket = this.io.connect(uri,{query: userId });
+            this._socket = this.io.connect(uri,{query: 'userId='+userId });
         },
 
 
@@ -34,7 +34,7 @@ define(["connectionInterface"],function(ConnectionInterface) {
 
         registerMessenger: connectionInterface.registerMessenger = function(messenger){
             var self = this;
-            if (this.isConnected()) {
+            //if (this.isConnected()) {
                 this._socket.on('chat-message', messenger.onMessageReceived);
 
                 var base = messenger.sendMessage.bind(messenger);
@@ -42,9 +42,9 @@ define(["connectionInterface"],function(ConnectionInterface) {
                     base(message);
                     self._socket.emit('chat-message',{message: message});
                 };
-            } else{
-                throw  new Error('socket is disconnected')
-            }
+            //} else{
+               // throw  new Error('socket is disconnected')
+           // }
         }
     };
     return SocketIoController;
