@@ -12,6 +12,7 @@ define(['messengerInterface'],function(MessengerInterface) {
 
         onMessageReceived: messengerInterface.sendMessageEvent = function (message) {
             if(this.observer) {
+                console.log(message);
                 this.observer.update(message);
             }
         },
