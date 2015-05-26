@@ -44,5 +44,17 @@ describe('Given MessageDAO', function () {
         messageDAO.onMessageReceived(user, message);
       });
     });
+
+    describe('With a message that exceeds 140 characters', function () {
+      it('should broadcast only the first 140 characters of the message', function (done) {
+        message = "This message contains more than 140 characters. Please be more concise and use less words to say " +
+                  "what you want to say. Otherwise, we will cut your message.";
+        messageDAO.broadcast = function (msg) {
+          expect(msg.message).length.to.be.at.most(140);
+          done();
+        };
+        messageDAO.onMessageReceived(user, message);
+      });
+    });
   });
 });
