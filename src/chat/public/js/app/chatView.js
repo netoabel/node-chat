@@ -22,7 +22,7 @@ define(['jquery'] ,function($){
             messageLi.append(messageSpan);
             messageLi.append(" " + message.message);
             this.messagesUl.append(messageLi);
-            this.messagesUl.parent().scrollTop(500);
+            this.messagesUl.parent().scrollTop(this.messagesUl.parent().prop("scrollHeight"));
         },
 
         /*isMessageValid: function (text){
