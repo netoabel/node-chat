@@ -19,7 +19,6 @@ define(["connectionInterface"],function(ConnectionInterface) {
         constructor: SocketIoController,
 
         startConnection: connectionInterface.startConnection = function (uri,userId) {
-            console.log("tryign to connect at: " + uri + " with id: " +userId);
             this._socket = this.io.connect(uri,{query: 'userId='+userId });
         },
 

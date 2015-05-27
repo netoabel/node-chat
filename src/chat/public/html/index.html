@@ -45,13 +45,11 @@
                 $('#messages').append(li);
                 var messages = $('#messages');
                 $('#m').blur();
-                console.log($('#chat').size());
             }
             $('#m').val('');
             $('#b1').focus();
         }
     });
-    console.log('check 1', socket.connected);
     socket.on('chat-message', function(msg){
         $('#messages').append($('<li>').text(msg));
     });

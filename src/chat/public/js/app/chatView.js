@@ -18,7 +18,6 @@ define(['jquery'] ,function($){
             var messageSpan = $('<span>');
 
             messageSpan.text("[" + this.getCurrentHourAndMinute() + "] ");
-            console.log(message)
             messageSpan.append($('<b>').text(message._username + " :"));
             messageLi.append(messageSpan);
             messageLi.append(" " + message._text);
