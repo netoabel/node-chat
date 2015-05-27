@@ -16,7 +16,7 @@ describe('Given MessageDAO', function () {
     describe('With valid user and message', function () {
       it('should broadcast the given message', function (done) {
         messageDAO.broadcast = function (msg) {
-          expect(msg.message).to.be.equal(message);
+          expect(msg.getText()).to.be.equal(message);
           done();
         };
         messageDAO.onMessageReceived(user, message);
@@ -24,7 +24,7 @@ describe('Given MessageDAO', function () {
 
       it('should broadcast the message with the given user\'s username', function (done) {
         messageDAO.broadcast = function (msg) {
-          expect(msg.username).to.be.equal(user.getName());
+          expect(msg.getUserName()).to.be.equal(user.getName());
           done();
         };
         messageDAO.onMessageReceived(user, message);
@@ -50,7 +50,7 @@ describe('Given MessageDAO', function () {
         message = "This message contains more than 140 characters. Please be more concise and use less words to say " +
                   "what you want to say. Otherwise, we will cut your message.";
         messageDAO.broadcast = function (msg) {
-          expect(msg.message).length.to.be.at.most(140);
+          expect(msg.getText()).length.to.be.at.most(140);
           done();
         };
         messageDAO.onMessageReceived(user, message);

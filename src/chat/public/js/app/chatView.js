@@ -18,9 +18,10 @@ define(['jquery'] ,function($){
             var messageSpan = $('<span>');
 
             messageSpan.text("[" + this.getCurrentHourAndMinute() + "] ");
-            messageSpan.append($('<b>').text(message.username + " :"));
+            console.log(message)
+            messageSpan.append($('<b>').text(message._username + " :"));
             messageLi.append(messageSpan);
-            messageLi.append(" " + message.message);
+            messageLi.append(" " + message._text);
             this.messagesUl.append(messageLi);
             this.messagesUl.parent().scrollTop(this.messagesUl.parent().prop("scrollHeight"));
         },

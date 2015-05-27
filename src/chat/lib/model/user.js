@@ -2,7 +2,6 @@
 
 function User(data){
   if(data) {
-    //this._connectionId = data.connectionId;
     this._userId = data.userId;
     this._name = data.name;
     this._connectionId = data.connectionId;

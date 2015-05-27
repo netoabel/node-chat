@@ -11,6 +11,7 @@ SocketIoMessageDAO.prototype = {
     var broadcast = dao.broadcast;
     var self = this;
 
+    //TODO: Send the whole object or only the necessary data?
     dao.broadcast = function (message) {
       broadcast(message);
       self._io.emit('chat-message', message);
