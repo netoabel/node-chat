@@ -2,21 +2,23 @@
 var Promise = require('bluebird');
 var User = require('../../user.js');
 
-function UserDAO() {
+function UserDAO(dao) {
+  this._dao = dao;
   this.users = [
-    { userId: '1', name: 'Roberto Júnior' },
-    { userId: '2', name: 'Bruno Alves' }
+    {userId: '1', name: 'Roberto Júnior'},
+    {userId: '2', name: 'Bruno Alves'}
   ];
+  this._defineGetUser();
 }
 
 UserDAO.prototype = {
   constructor: UserDAO,
 
-  setup: function (dao) {
+  _defineGetUser: function () {
     var self = this;
-    var getUser = dao.getUser;
+    var getUser = this._dao.getUser;
 
-    dao.getUser = function (userId) {
+    this._dao.getUser = function (userId) {
       getUser(userId);
 
       return new Promise(function (resolve, reject) {
@@ -26,7 +28,7 @@ UserDAO.prototype = {
           return user.userId === userId;
         })[0];
 
-        if(result) {
+        if (result) {
           var user = new User({userId: result.userId, name: result.name});
         }
 

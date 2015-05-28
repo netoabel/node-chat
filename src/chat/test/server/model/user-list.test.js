@@ -49,24 +49,6 @@ describe('Given UserList', function () {
       });
     });
 
-    describe('With an existing user id', function () {
-      it('should remove the corresponding user from users list', function () {
-        userList.add(user);
-        userList.remove({userId: existingUserId});
-
-        expect(userList.getList()).to.be.empty;
-      });
-    });
-
-    describe('With an non existent user id', function () {
-      it('should not remove any user from users list', function () {
-        userList.add(user);
-        userList.remove({userId: 'non existent id'});
-
-        expect(userList.getList()).to.not.be.empty;
-      });
-    });
-
     describe('With a valid connection id', function () {
       it('should remove the corresponding user from users list', function () {
         userList.add(user);

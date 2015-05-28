@@ -16,7 +16,7 @@ describe('Given ConnectionDAO', function () {
   beforeEach(function () {
     userList = new UserList();
     userDAO = new UserDAO();
-    stubUserDAO = new StubUserDAO();
+    stubUserDAO = new StubUserDAO(userDAO);
     connectionDAO = new ConnectionDAO(userList, userDAO);
 
     stubList = [];
@@ -26,8 +26,6 @@ describe('Given ConnectionDAO', function () {
     userList.remove = function (data) {
       stubList.pop();
     };
-
-    stubUserDAO.setup(userDAO);
   });
 
   describe('#connect()', function () {

@@ -2,33 +2,22 @@
 
 var User = require('./user');
 
-function UserList(){
+function UserList() {
   this._list = [];
-  //var list = [];
-
-  //Object.defineProperties(this, {
-  //  "_list": {
-  //    get: function () {
-  //      return list;
-  //    }
-  //  }
-  //});
 }
 
 UserList.prototype = {
   constructor: UserList,
 
   add: function (user) {
-    if(user && user instanceof User) {
+    if (user && user instanceof User) {
       this._list.push(user);
     }
   },
 
   remove: function (data) {
     this._list = this._list.filter(function (user) {
-      if(data.userId) {
-        return user.getUserId() !== data.userId;
-      }else if(data.connectionId){
+      if (data.connectionId) {
         return user.getConnectionId() !== data.connectionId;
       }
     });
@@ -39,7 +28,7 @@ UserList.prototype = {
       return user.getUserId() === userId;
     });
 
-    if(result) {
+    if (result) {
       return result[0];
     }
   },
