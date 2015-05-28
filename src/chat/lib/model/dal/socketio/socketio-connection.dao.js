@@ -12,10 +12,7 @@ SocketIoConnectionDAO.prototype = {
     var self = this;
     self._io.on('connection', function (client) {
       connectionDAO.connect({ userId: self._userId, connectionId: client.id }, function (user) {
-        //TODO: It probably can be done in a better way
-        client.on('chat-message', function (data) {
-          messageDAO.onMessageReceived(user, data.message);
-        });
+        messageDAO.setOnMessageEvent(user, client);
       });
     });
 

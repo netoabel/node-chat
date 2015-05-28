@@ -1,6 +1,6 @@
 'use strict';
 
-function SocketIoMessageDAO(io){
+function SocketIoMessageDAO(io) {
   this._io = io;
 }
 
@@ -9,12 +9,23 @@ SocketIoMessageDAO.prototype = {
 
   setup: function (dao) {
     var broadcast = dao.broadcast;
+    var setOnMessageEvent = dao.setOnMessageEvent;
     var self = this;
 
-    //TODO: Send the whole object or only the necessary data?
     dao.broadcast = function (message) {
-      broadcast(message);
-      self._io.emit('chat-message', message);
+      var data = {
+        username: message.getUserName(),
+        text: message.getText()
+      };
+      broadcast(data);
+      self._io.emit('chat-message', data);
+    };
+
+    dao.setOnMessageEvent = function (user, client) {
+      setOnMessageEvent(user, client);
+      client.on('chat-message', function (data) {
+        dao.onMessageReceived(user, data.message);
+      });
     };
   }
 };

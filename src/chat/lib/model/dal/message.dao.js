@@ -13,6 +13,9 @@ MessageDAO.prototype = {
   broadcast: function (message) {
   },
 
+  setOnMessageEvent: function (user, client) {
+  },
+
   onMessageReceived: function (user, message) {
     var message = new Message({username: user.getName(), text: message});
     message.sanitize();
