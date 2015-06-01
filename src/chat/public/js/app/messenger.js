@@ -1,29 +1,27 @@
 'use strict';
-define(['messengerInterface'],function(MessengerInterface) {
+define([],function() {
 
-    var messengerInterface = Object.create(MessengerInterface);
+  function Messenger() {
+    this.observer =  null
+  }
 
-    function Messenger() {
-        this.observer =  null
+  Messenger.prototype = {
+    constructor: Messenger,
+
+    onMessageReceived:function (message) {
+      if(this.observer) {
+        this.observer.update(message);
+      }
+    },
+
+    setObserver: function(observer){
+      this.observer = observer;
+    },
+
+    sendMessage: function (message) {
+
     }
 
-    Messenger.prototype = {
-        constructor: Messenger,
-
-        onMessageReceived: messengerInterface.onMessageReceived = function (message) {
-            if(this.observer) {
-                this.observer.update(message);
-            }
-        },
-
-        setObserver: function(observer){
-            this.observer = observer;
-        },
-
-        sendMessage: messengerInterface.sendMessageEvent = function (message) {
-
-        }
-
-    };
-    return Messenger;
+  };
+  return Messenger;
 });

@@ -22,9 +22,7 @@ require.config({
     //app
     socketIoController:'js/app/socketIoController',
     messenger:'js/app/messenger',
-    chatView:'js/app/chatView',
-    connectionInterface:'js/app/connectionInterface',
-    messengerInterface:'js/app/messengerInterface'
+    chatView:'js/app/chatView'
 
   },
 

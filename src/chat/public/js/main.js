@@ -44,7 +44,7 @@ require(['jquery','socketIo','socketIoController','messenger','chatView'],
         });
 
         var socketIoController = new SocketIoController(io);
-        socketIoController.startConnection("ws://localhost:3000",$("#userID").val());
+        socketIoController.startConnection("ws://172.27.102.247:3000",$("#userID").val());
 
         var messenger = new Messenger();
         var chatView = new ChatView(messenger,messageUl);
