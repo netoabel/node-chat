@@ -2,7 +2,6 @@
 
 require(['chai','messenger'],function(chai,Messenger) {
 
-    //return function() {
         var expect = chai.expect;
 
         describe("Message Controller", function () {
@@ -36,6 +35,6 @@ require(['chai','messenger'],function(chai,Messenger) {
 
             });
         });
-    //}
+
 });
 

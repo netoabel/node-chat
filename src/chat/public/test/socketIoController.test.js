@@ -2,7 +2,7 @@
 
 
 define(['chai','socketIoController','messenger'],function(chai,SocketIoController,Messenger) {
-    //return  function() {
+
         var expect = chai.expect;
         describe("Connection  Controller", function () {
 
@@ -182,6 +182,5 @@ define(['chai','socketIoController','messenger'],function(chai,SocketIoControlle
             });
 
         });
-   // }
 });
 

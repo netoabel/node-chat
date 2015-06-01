@@ -4,7 +4,7 @@
 'use strict';
 
 require(['chai','jquery','chatView','messenger'],function(chai,$,ChatView,Messenger){
-    //return function(){
+
         var expect = chai.expect;
 
         describe("Chat view",function(){
@@ -62,5 +62,5 @@ require(['chai','jquery','chatView','messenger'],function(chai,$,ChatView,Messen
                 });
             });
         });
-    //}
+
 });
