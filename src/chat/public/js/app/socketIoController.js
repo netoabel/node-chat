@@ -34,9 +34,9 @@ define([],function() {
       this._socket.on('chat-message', messenger.onMessageReceived.bind(messenger));
 
       var base = messenger.sendMessage.bind(messenger);
-      messenger.sendMessage = function (message) {
-        base(message);
-        self._socket.emit('chat-message',{message: message});
+      messenger.sendMessage = function (message, userId) {
+        base(message, userId);
+        self._socket.emit('chat-message',{message: message, userId: userId});
       };
 
     }
