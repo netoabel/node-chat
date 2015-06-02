@@ -1,26 +1,35 @@
 'use strict';
 
-var http = require('http').Server(),
-    io = require('socket.io')(http),
+var StubUserDAO = require('./model/dal/stubUserDAO.js'),
+    UserDAO = require('./model/dal/userDAO'),
+    User = require('./model/domain/user'),
+    UserList = require('./model/domain/userList'),
 
-    ConnectionDAO = require('./model/dal/connection.dao'),
-    SocketioConnectionDAO = require('./model/dal/socketio/socketio-connection.dao'),
-    MessageDAO = require('./model/dal/message.dao'),
-    SocketioMessageDAO = require('./model/dal/socketio/socketio-message.dao'),
-    StubUserDAO = require('./model/dal/stub/stub-user.dao'),
-    UserDAO = require('./model/dal/user.dao'),
-    User = require('./model/user'),
-    UserList = require('./model/user-list'),
+    SocketioConnection = require('./model/transport/socketioConnection'),
+    ConnectionController = require('./controller/connectionController'),
+    UserHandler = require('./model/service/userHandler'),
+
+    SocketioMessenger = require('./model/transport/socketioMessenger'),
+    MessageController = require('./controller/messageController'),
+    Messenger = require('./model/service/messageHandler'),
 
     userList = new UserList(),
+
+    messenger = new Messenger(userList),
+    messageController = new MessageController(messenger),
+    socketioMessenger = new SocketioMessenger(messageController),
+
     userDAO = new UserDAO(),
-    connectionDAO = new ConnectionDAO(userList, userDAO),
-    messageDAO = new MessageDAO(),
-
     stubUserDAO = new StubUserDAO(userDAO),
-    socketioConnectionDAO = new SocketioConnectionDAO(io, connectionDAO, messageDAO),
-    socketioMessageDAO = new SocketioMessageDAO(io, messageDAO);
 
-http.listen(3000, function () {
-  console.log('WebSocket server listening for connections on port 3000');
+    userHandler = new UserHandler(userList, userDAO),
+    connectionController = new ConnectionController(userHandler),
+    socketioConnection = new SocketioConnection(socketioMessenger, connectionController);
+
+stubUserDAO.init();
+socketioConnection.init();
+
+socketioConnection.startServer(3000, function (io) {
+  socketioMessenger.init(io);
+  console.log('Chat server listening for connections on port 3000.');
 });

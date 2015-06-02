@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect,
-    Message = require('../../../lib/model/message.js');
+    Message = require('../../../lib/model/view/message.js');
 
 describe('Given Message', function () {
   describe('#sanitize()', function () {

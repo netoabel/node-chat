@@ -15,21 +15,23 @@ UserList.prototype = {
     }
   },
 
-  remove: function (data) {
-    this._list = this._list.filter(function (user) {
-      if (data.connectionId) {
-        return user.getConnectionId() !== data.connectionId;
+  remove: function (userId) {
+    var result = [];
+    for(var i = 0; i < this._list.length; i++){
+      var user = this._list[i];
+      if(user.getUserId() !== userId){
+        result.push(user);
       }
-    });
+    }
+    this._list = result;
   },
 
   get: function (userId) {
-    var result = this._list.filter(function (user) {
-      return user.getUserId() === userId;
-    });
-
-    if (result) {
-      return result[0];
+    for(var i = 0; i < this._list.length; i++){
+      var user = this._list[i];
+      if(user.getUserId() === userId){
+        return user;
+      }
     }
   },
 
