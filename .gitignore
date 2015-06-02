@@ -30,3 +30,4 @@ node_modules
 .pm2
 .node-gyp
 .v8flags*
+.idea/.*

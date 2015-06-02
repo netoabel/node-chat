@@ -3,8 +3,8 @@
  */
 'use strict';
 
-define(['chai','jquery','chatView','messenger'],function(chai,$,ChatView,Messenger){
-    return function(){
+require(['chai','jquery','chatView','messenger'],function(chai,$,ChatView,Messenger){
+
         var expect = chai.expect;
 
         describe("Chat view",function(){
@@ -62,5 +62,5 @@ define(['chai','jquery','chatView','messenger'],function(chai,$,ChatView,Messeng
                 });
             });
         });
-    }
+
 });

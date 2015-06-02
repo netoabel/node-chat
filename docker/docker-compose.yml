@@ -4,15 +4,21 @@ chat:
   ports:
     - "3000:3000"
   volumes:
-    - /home/abel/repos/node-chat/src:/home/node-chat
+    - ../src:/home/node-chat
 chattest:
   build: ../src/
   command: gulp test
   volumes:
-    - /home/abel/repos/node-chat/src:/home/node-chat:ro
+    - ../src:/home/node-chat:ro
+chatclienttest:
+  build: ../src/karma/
+  #command: npm install
+  command: karma start chat/public/karma.conf.js
+  volumes:
+     - ../src:/home/node-chat
 nginx:
   image: nginx:latest
   ports:
     - "80:80"
   volumes:
-    - /home/abel/repos/node-chat/src/chat/public:/usr/share/nginx/html:ro
+    - ../src/chat/public:/usr/share/nginx/html:ro

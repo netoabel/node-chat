@@ -1,8 +1,8 @@
 "use strict";
 
 
-define(['chai','socketIoController','messengerInterface'],function(chai,SocketIoController,Messenger) {
-    return  function() {
+define(['chai','socketIoController','messenger'],function(chai,SocketIoController,Messenger) {
+
         var expect = chai.expect;
         describe("Connection  Controller", function () {
 
@@ -98,7 +98,7 @@ define(['chai','socketIoController','messengerInterface'],function(chai,SocketIo
                 var stubSocket,socketIoController, messenger;
 
                 beforeEach(function () {
-                    messenger = Object.create(Messenger);
+                    messenger = new Messenger();
                     stubSocket =  {
                         on: function(){},
                         emit: function(){},
@@ -119,7 +119,6 @@ define(['chai','socketIoController','messengerInterface'],function(chai,SocketIo
                         done();
                     };
                     socketIoController.startConnection();
-
                     socketIoController.registerMessenger(messenger);
                 });
 
@@ -183,6 +182,5 @@ define(['chai','socketIoController','messengerInterface'],function(chai,SocketIo
             });
 
         });
-    }
 });
 

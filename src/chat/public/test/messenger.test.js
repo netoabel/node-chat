@@ -1,8 +1,7 @@
 'use strict';
 
-define(['chai','messenger','socketIoController'],function(chai,Messenger,ConnectionController) {
+require(['chai','messenger'],function(chai,Messenger) {
 
-    return function() {
         var expect = chai.expect;
 
         describe("Message Controller", function () {
@@ -17,14 +16,16 @@ define(['chai','messenger','socketIoController'],function(chai,Messenger,Connect
 
             describe("#onMessageReceived", function () {
 
-                it("should send the message to the listener 'update' method", function () {
+                it("should send the message to the listener 'update' method", function (done) {
                     var testMessage = "test";
                     var stubListener = {
                         update : function (message) {
-                            expect(message).to.equal(testMessage);
+                          expect(message).to.equal(testMessage);
+                          done()
                         }
                     };
-                    var messenger = new Messenger(stubListener);
+                    var messenger = new Messenger();
+                    messenger.setObserver(stubListener);
                     messenger.onMessageReceived(testMessage);
                 });
 
@@ -34,6 +35,6 @@ define(['chai','messenger','socketIoController'],function(chai,Messenger,Connect
 
             });
         });
-    }
+
 });
 
