@@ -1,5 +1,5 @@
 'use strict';
-var User = require('../user.js');
+var User = require('../domain/user.js');
 
 function UserDAO() {
 }

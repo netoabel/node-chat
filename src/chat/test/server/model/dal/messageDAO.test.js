@@ -1,8 +1,8 @@
 'use strict';
 
 var expect = require('chai').expect,
-    MessageDAO = require('../../../lib/model/dal/message.dao.js'),
-    User = require('../../../lib/model/user.js');
+    MessageDAO = require('../../../../lib/model/dal/message.js'),
+    User = require('../../../../lib/model/domain/user.js');
 
 describe('Given MessageDAO', function () {
   describe('#onMessageReceived()', function () {

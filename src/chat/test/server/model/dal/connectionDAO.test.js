@@ -2,13 +2,13 @@
 
 var expect = require('chai').expect,
 
-    ConnectionDAO = require('../../../lib/model/dal/connection.dao.js'),
+    ConnectionDAO = require('../../../../lib/model/dal/connection.js'),
 
-    StubUserDAO = require('./../../../lib/model/dal/stub/stub-user.dao.js'),
-    UserDAO = require('./../../../lib/model/dal/user.dao.js'),
+    StubUserDAO = require('./../../../../lib/model/dal/stubUserDAO.js'),
+    UserDAO = require('./../../../../lib/model/dal/userDAO.js'),
 
-    User = require('../../../lib/model/user'),
-    UserList = require('../../../lib/model/user-list');
+    User = require('../../../../lib/model/domain/user'),
+    UserList = require('../../../../lib/model/domain/userList');
 
 describe('Given ConnectionDAO', function () {
   var userList, userDAO, stubUserDAO, connectionDAO, stubList;
@@ -26,6 +26,8 @@ describe('Given ConnectionDAO', function () {
     userList.remove = function (data) {
       stubList.pop();
     };
+
+    stubUserDAO.init();
   });
 
   describe('#connect()', function () {

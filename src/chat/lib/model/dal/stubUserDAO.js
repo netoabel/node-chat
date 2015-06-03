@@ -1,14 +1,13 @@
 'use strict';
 var Promise = require('bluebird');
-var User = require('../../user.js');
+var User = require('../domain/user.js');
 
 function UserDAO(dao) {
   this._dao = dao;
   this.users = [
-    {userId: '1', name: 'Roberto Júnior'},
-    {userId: '2', name: 'Bruno Alves'}
+    { userId: '1', name: 'Roberto Júnior' },
+    { userId: '2', name: 'Bruno Alves' }
   ];
-  this._defineGetUser();
 }
 
 UserDAO.prototype = {
@@ -28,7 +27,7 @@ UserDAO.prototype = {
           return user.userId === userId;
         })[0];
 
-        if (result) {
+        if(result) {
           var user = new User({userId: result.userId, name: result.name});
         }
 
@@ -36,6 +35,10 @@ UserDAO.prototype = {
 
       });
     };
+  },
+
+  init: function () {
+    this._defineGetUser();
   }
 };
 

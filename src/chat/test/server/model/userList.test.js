@@ -1,8 +1,8 @@
 'use strict';
 
 var expect = require('chai').expect,
-    UserList = require('../../../lib/model/user-list.js'),
-    User = require('../../../lib/model/user.js');
+    UserList = require('../../../lib/model/domain/userList.js'),
+    User = require('../../../lib/model/domain/user.js');
 
 describe('Given UserList', function () {
   describe('#add()', function () {
