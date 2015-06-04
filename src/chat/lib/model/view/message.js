@@ -8,8 +8,6 @@ function Message(data) {
     this._username = data.username;
     this._text = data.text;
   }
-  this._limitSize();
-  this._sanitize();
 }
 
 Message.prototype = {
@@ -23,11 +21,11 @@ Message.prototype = {
     return this._text;
   },
 
-  _sanitize: function () {
+  sanitize: function () {
     this._text = entities.encode(this._text);
   },
 
-  _limitSize: function () {
+  limitSize: function () {
     if (this._text.length > 140) {
       this._text = this._text.substring(0, 140);
     }

@@ -17,7 +17,6 @@ UserHandler.prototype = {
         user.setConnectionId(connectionId);
         self._userList.add(user);
       }
-      //TODO: Error handling
       if (callback) {
         callback(user);
       }

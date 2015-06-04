@@ -12,6 +12,8 @@ MessageHandler.prototype = {
   createMessage: function (messageText, userId, callback) {
     var user = this._userList.get(userId);
     var message = new Message({username: user.getName(), text: messageText});
+    message.limitSize();
+    message.sanitize();
 
     callback(message);
   }
