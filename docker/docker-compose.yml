@@ -12,7 +12,8 @@ chattest:
     - ../src:/home/node-chat:ro
 chatclienttest:
   build: ../src/karma/
-  #command: npm install
+  net: "host"
+  #comand: npm install
   command: karma start chat/public/karma.conf.js
   volumes:
      - ../src:/home/node-chat
