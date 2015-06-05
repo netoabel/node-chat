@@ -33,7 +33,6 @@ SocketioConnection.prototype = {
   _setupUserIdMiddleware: function () {
     var self = this;
     this._io.use(function (socket, next) {
-      //TODO: It can be a problem
       self._userId = socket.request._query.userId;
       next();
     });

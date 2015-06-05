@@ -18,7 +18,7 @@ define([],function() {
       this.observer = observer;
     },
 
-    sendMessage: function (message) {
+    sendMessage: function (message, userId) {
 
     }
 

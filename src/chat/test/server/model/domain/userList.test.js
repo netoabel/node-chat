@@ -1,8 +1,8 @@
 'use strict';
 
 var expect = require('chai').expect,
-    UserList = require('../../../lib/model/domain/userList.js'),
-    User = require('../../../lib/model/domain/user.js');
+    UserList = require('../../../../lib/model/domain/userList.js'),
+    User = require('../../../../lib/model/domain/user.js');
 
 describe('Given UserList', function () {
   describe('#add()', function () {
@@ -49,19 +49,19 @@ describe('Given UserList', function () {
       });
     });
 
-    describe('With a valid connection id', function () {
+    describe('With a valid user id', function () {
       it('should remove the corresponding user from users list', function () {
         userList.add(user);
-        userList.remove({connectionId: existingConnectionId});
+        userList.remove(existingUserId);
 
         expect(userList.getList()).to.be.empty;
       });
     });
 
-    describe('With a connection id that isn\'t being used by any user', function () {
+    describe('With a user id that isn\'t being used by any user', function () {
       it('shouldn\'t remove anything from the user list', function () {
         userList.add(user);
-        userList.remove({connectionId: 'invalid connection id'});
+        userList.remove({userId: 'invalid user id'});
 
         expect(userList.getList()).to.not.be.empty;
       });
@@ -69,7 +69,7 @@ describe('Given UserList', function () {
 
     describe('When the user list is empty', function () {
       it('should keep it empty', function () {
-        userList.remove({userId: existingUserId});
+        userList.remove(existingUserId);
 
         expect(userList.getList()).to.be.empty;
       });

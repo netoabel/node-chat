@@ -29,14 +29,14 @@ define(['jquery'] ,function($){
             return text.replace(/\s/g, '').length;
         },*/
 
-        registerInputField: function(field){
+        registerInputField: function(field, userId){
             var self = this;
             field.keydown(function(event) {
                 if(event.keyCode === 13) {
                     var message = field.val();
                     field.val('');
                     if (message) {
-                        self.messenger.sendMessage(message);
+                        self.messenger.sendMessage(message, userId);
                     }
                 }
             });
