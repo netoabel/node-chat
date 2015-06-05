@@ -5,19 +5,31 @@ var expect = require('chai').expect,
 
 describe('Given Message', function () {
   describe('#sanitize()', function () {
-    describe('With a message that has html/javascript content in it', function () {
+    describe('Within a message that has a javascript alert() in it', function () {
       it('should sanitize the message', function () {
+        var text = "<script type='text/javascript'>alert('test')</script>";
         var message = new Message({
           username: 'test user',
-          text: "<script type='text/javascript'>alert('test')</script>"
+          text: text
         });
 
         message.sanitize();
 
-        expect(message.getText()).to.not.contain("<");
-        expect(message.getText()).to.not.contain(">");
-        expect(message.getText()).to.not.contain("'");
-        expect(message.getText()).to.not.contain('"');
+        expect(message.getText()).to.not.contain(text);
+      });
+    });
+
+    describe('Within a message that tries to make a text bold', function () {
+      it('should sanitize the message', function () {
+        var text = "<strong>I'm Strong!</strong>";
+        var message = new Message({
+          username: 'test user',
+          text: text
+        });
+
+        message.sanitize();
+
+        expect(message.getText()).to.not.contain(text);
       });
     });
   });

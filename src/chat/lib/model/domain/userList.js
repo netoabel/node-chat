@@ -11,26 +11,27 @@ UserList.prototype = {
 
   add: function (user) {
     if (user && user instanceof User) {
+      this.remove({connectionId: user.getConnectionId()});
       this._list.push(user);
     }
   },
 
-  remove: function (userId) {
-    var result = [];
-    for(var i = 0; i < this._list.length; i++){
-      var user = this._list[i];
-      if(user.getUserId() !== userId){
-        result.push(user);
-      }
+  remove: function (args) {
+    var index = this._list.indexOf(this.get(args));
+    if (index > -1) {
+      this._list.splice(index, 1);
     }
-    this._list = result;
   },
 
-  get: function (userId) {
-    for(var i = 0; i < this._list.length; i++){
-      var user = this._list[i];
-      if(user.getUserId() === userId){
-        return user;
+  get: function (args) {
+    if(args) {
+      for (var i = 0; i < this._list.length; i++) {
+        var user = this._list[i];
+        if (args.userId && user.getUserId() === args.userId) {
+          return user;
+        } else if (args.connectionId && user.getConnectionId() === args.connectionId) {
+          return user;
+        }
       }
     }
   },
