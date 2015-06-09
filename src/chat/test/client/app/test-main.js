@@ -16,13 +16,13 @@ require.config({
   paths:{
 
     //libs
-    jquery: 'js/lib/jquery-2.1.3.min',
-    chai:'js/lib/chai',
+    jquery: 'test/client/lib/jquery-2.1.3.min',
+    chai:'test/client/lib/chai',
 
     //app
-    socketIoController:'js/app/socketIoController',
-    messenger:'js/app/messenger',
-    chatView:'js/app/chatView'
+    socketIoController:'public/js/app/socketIoController',
+    messenger:'public/js/app/messenger',
+    chatView:'public/js/app/chatView'
 
   },
 

@@ -5,7 +5,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: '../../',
 
 
     // frameworks to use
@@ -15,11 +15,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      {pattern: 'js/lib/chai.js', included: false},
-      {pattern: 'js/lib/jquery-2.1.3.min.js', included: false},
-      {pattern: 'js/app/*.js', included: false },
-      {pattern: 'test/*.test.js',included: false},
-      'test/test-main.js'
+      {pattern: 'test/client/lib/chai.js', included: false},
+      {pattern: 'test/client/lib/jquery-2.1.3.min.js', included: false},
+      {pattern: 'public/js/app/*.js', included: false },
+      {pattern: 'test/client/app/*.test.js',included: false},
+      'test/client/app/test-main.js'
     ],
 
 
