@@ -4,7 +4,7 @@ MAINTAINER netoabel <abel.neto@gmail.com>
 
 RUN npm install -g gulp@v3.8.11 \
 && npm install -g pm2@0.12.9 \
-&& npm install -g mocha
+&& npm install -g mocha@2.2.5
 
 ENV HOME /home/node-chat/
 

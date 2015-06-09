@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM node:0.12-slim
 
 MAINTAINER guilhermelucena <lucena9682@gmail.com>
 
@@ -9,11 +9,7 @@ RUN ln -s /usr/bin/xvfb-chromium /usr/bin/google-chrome
 RUN ln -s /usr/bin/xvfb-chromium /usr/bin/chromium-browser
 RUN chmod 777 /usr/bin/google-chrome
 
-RUN  apt-get update
-RUN  apt-get install -y \
-     npm nodejs nodejs-legacy
-RUN npm install -g npm@latest \
-&& npm install -g karma-cli
+RUN npm install -g karma-cli
 
 ENV HOME /home/node-chat/
 
