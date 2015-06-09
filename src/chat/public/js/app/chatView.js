@@ -26,8 +26,8 @@ define(['jquery'] ,function($){
         },
 
         /*isMessageValid: function (text){
-            return text.replace(/\s/g, '').length;
-        },*/
+         return text.replace(/\s/g, '').length;
+         },*/
 
         registerInputField: function(field, userId){
             var self = this;
@@ -43,18 +43,18 @@ define(['jquery'] ,function($){
         },
 
         registerFocusOnEnter: function (context, item) {
-          context.keydown(function (event) {
-              if (event.keyCode === 13) {
-                  if(!item.is(':focus')) {
-                      item.focus();
-                  }else{
-                      item.blur();
-                  }
-              }
-          });
+            context.keydown(function (event) {
+                if (event.keyCode === 13) {
+                    if(!item.is(':focus')) {
+                        item.focus();
+                    }else{
+                        item.blur();
+                    }
+                }
+            });
         },
 
-       getCurrentHourAndMinute: function () {
+        getCurrentHourAndMinute: function () {
             var currentDate = new Date();
             return ("0" + currentDate.getHours()).slice(-2) + ":" + ("0" + currentDate.getMinutes()).slice(-2)
         }

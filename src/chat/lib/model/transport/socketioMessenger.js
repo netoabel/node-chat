@@ -15,7 +15,6 @@ SocketioMessenger.prototype = {
   },
 
   _setupBroadcast: function (io) {
-    var self = this;
     var broadcast = this._controller.broadcast;
 
     this._controller.broadcast = function (message) {

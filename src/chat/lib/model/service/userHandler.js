@@ -23,8 +23,8 @@ UserHandler.prototype = {
     });
   },
 
-  destroyUser: function (userId) {
-    this._userList.remove(userId);
+  destroyUser: function (connectionId) {
+    this._userList.remove({connectionId:connectionId});
   },
 
   //TODO: Should it be inside createUser?

@@ -22,26 +22,20 @@ SocketioConnection.prototype = {
     var self = this;
     this._io.on('connection', function (client) {
       self._ioMessenger.setOnMessageEvent(client);
-      self._controller.onConnect(self._userId, client.id);
+      self._controller.onConnect(client.request._query.userId, client.request._query.battleId, client.id);
 
       client.on('disconnect', function () {
         self._controller.onDisconnect(self._userId);
       });
     });
-  },
-  
-  _setupUserIdMiddleware: function () {
-    var self = this;
-    this._io.use(function (socket, next) {
-      //TODO: It can be a problem
-      self._userId = socket.request._query.userId;
-      next();
+
+    this._io.on('error', function (error) {
+      console.error(error);
     });
   },
 
   init: function () {
     this._setupEvents();
-    this._setupUserIdMiddleware();
   }
 };
 

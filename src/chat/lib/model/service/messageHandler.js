@@ -11,11 +11,13 @@ MessageHandler.prototype = {
 
   createMessage: function (messageText, userId, callback) {
     var user = this._userList.get({userId: userId});
-    var message = new Message({username: user.getName(), text: messageText});
-    message.limitSize();
-    message.sanitize();
+    if(user) {
+      var message = new Message({username: user.getName(), text: messageText});
+      message.limitSize();
+      message.sanitize();
 
-    callback(message);
+      callback(message);
+    }
   }
 };
 

@@ -34,10 +34,10 @@ describe('Given UserList', function () {
       });
     });
 
-    describe('With a valid user that has a connection id that is already in the list', function () {
+    describe('With a valid user that has a user id that is already in the list', function () {
       it('should replace the existing user', function () {
         var user1 = new User({connectionId: '1', name: 'username1', userId: '1'});
-        var user2 = new User({connectionId: '1', name: 'username2', userId: '2'});
+        var user2 = new User({connectionId: '2', name: 'username2', userId: '1'});
         userList.add(user1);
         userList.add(user2);
         expect(userList.getList()).to.have.length(1);
@@ -68,10 +68,28 @@ describe('Given UserList', function () {
       });
       it('should remove only one user from users list', function () {
         var user1 = new User({connectionId: '1', name: 'username1', userId: '1'});
-        var user2 = new User({connectionId: '2', name: 'username2', userId: '1'});
+        var user2 = new User({connectionId: '2', name: 'username2', userId: '2'});
         userList.add(user1);
         userList.add(user2);
         userList.remove({userId: '1'});
+
+        expect(userList.getList()).to.have.length(1);
+      });
+    });
+
+    describe('With a valid connection id', function () {
+      it('should remove the corresponding user from users list', function () {
+        userList.add(user);
+        userList.remove({connectionId: existingConnectionId});
+
+        expect(userList.getList()).to.be.empty;
+      });
+      it('should remove only one user from users list', function () {
+        var user1 = new User({connectionId: '1', name: 'username1', userId: '1'});
+        var user2 = new User({connectionId: '1', name: 'username2', userId: '2'});
+        userList.add(user1);
+        userList.add(user2);
+        userList.remove({connectionId: '1'});
 
         expect(userList.getList()).to.have.length(1);
       });

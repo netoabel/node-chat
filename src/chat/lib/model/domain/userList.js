@@ -11,7 +11,7 @@ UserList.prototype = {
 
   add: function (user) {
     if (user && user instanceof User) {
-      this.remove({connectionId: user.getConnectionId()});
+      this.remove({userId: user.getUserId()});
       this._list.push(user);
     }
   },

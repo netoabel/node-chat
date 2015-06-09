@@ -18,6 +18,10 @@ define([],function() {
 
     startConnection: function (uri,userId) {
       this._socket = this.io.connect(uri,{query: 'userId='+userId });
+
+      this._socket.on('error', function (error) {
+        console.error(error);
+      });
     },
 
 
