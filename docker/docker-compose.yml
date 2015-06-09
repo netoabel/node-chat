@@ -5,18 +5,6 @@ chat:
     - "3000:3000"
   volumes:
     - ../src:/home/node-chat
-chattest:
-  build: ../src/
-  command: gulp test
-  volumes:
-    - ../src:/home/node-chat:ro
-chatclienttest:
-  build: ../src/karma/
-  net: "host"
-  #comand: npm install
-  command: karma start chat/public/karma.conf.js
-  volumes:
-     - ../src:/home/node-chat
 nginx:
   image: nginx:latest
   ports:

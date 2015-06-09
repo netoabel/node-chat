@@ -1,0 +1,13 @@
+chattest:
+  build: ../src/
+  command: gulp test
+  volumes:
+    - ../src:/home/node-chat:ro
+chatclienttest:
+  build: ../src/karma/
+  net: "host"
+  #comand: npm install
+  command: karma start chat/test/client/karma.conf.js
+  volumes:
+     - ../src:/home/node-chat
+
